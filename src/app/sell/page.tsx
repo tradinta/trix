@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import styles from './page.module.css';
 import { CustomCursor } from '@/components/CustomCursor/CustomCursor';
 import { Footer } from '@/components/Footer/Footer';
-import { races } from '@/data/races';
+import { GRAND_PRIX_EVENTS } from '@/data/races';
 import { useLanguage } from '@/context/LanguageContext';
 import { ShieldCheck, Upload, ArrowRight, CheckCircle2, DollarSign, Tag, Calendar, FileText, Loader2 } from 'lucide-react';
 import Link from 'next/link';
@@ -19,7 +19,7 @@ export default function SellPage() {
   const [isUploading, setIsUploading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const selectedEvent = races.find((r) => r.id === selectedEventId) || races[0];
+  const selectedEvent = GRAND_PRIX_EVENTS.find((r) => r.id === selectedEventId) || GRAND_PRIX_EVENTS[0];
 
   // 10% Platform Fee calculation
   const platformFee = Math.round(askingPrice * 0.10);
@@ -105,7 +105,7 @@ export default function SellPage() {
                   onChange={(e) => setSelectedEventId(e.target.value)}
                   className={styles.selectInput}
                 >
-                  {races.map((race) => (
+                  {GRAND_PRIX_EVENTS.map((race) => (
                     <option key={race.id} value={race.id}>
                       {race.name} ({race.dateRange})
                     </option>
