@@ -2,15 +2,16 @@
 
 import React from 'react';
 import styles from './StaffTabNav.module.css';
-import { BarChart3, CreditCard, Tag } from 'lucide-react';
+import { BarChart3, CreditCard, Tag, Users } from 'lucide-react';
 
-export type StaffTab = 'analytics' | 'cards' | 'consignments';
+export type StaffTab = 'analytics' | 'cards' | 'consignments' | 'users';
 
 interface StaffTabNavProps {
   activeTab: StaffTab;
   onTabChange: (tab: StaffTab) => void;
   cardCount: number;
   consignmentCount: number;
+  userCount?: number;
 }
 
 export const StaffTabNav: React.FC<StaffTabNavProps> = ({
@@ -18,6 +19,7 @@ export const StaffTabNav: React.FC<StaffTabNavProps> = ({
   onTabChange,
   cardCount,
   consignmentCount,
+  userCount = 0,
 }) => {
   return (
     <div className={styles.tabRow}>
@@ -45,6 +47,15 @@ export const StaffTabNav: React.FC<StaffTabNavProps> = ({
         <Tag size={16} />
         <span>Ticket Listings</span>
         {consignmentCount > 0 && <span className={styles.badge}>{consignmentCount}</span>}
+      </button>
+
+      <button
+        onClick={() => onTabChange('users')}
+        className={`${styles.tabBtn} ${activeTab === 'users' ? styles.activeTab : ''}`}
+      >
+        <Users size={16} />
+        <span>User Accounts</span>
+        {userCount > 0 && <span className={styles.badge}>{userCount}</span>}
       </button>
     </div>
   );

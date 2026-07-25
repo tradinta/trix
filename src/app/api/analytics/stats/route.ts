@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { analyticsStore, TrackingEvent } from '@/lib/analytics';
 import { db } from '@/lib/db';
-import { pageVisit, paymentAttempt, ticketListing } from '@/lib/schema';
+import { pageVisit, paymentAttempt, ticketListing, user } from '@/lib/schema';
 import { desc } from 'drizzle-orm';
 
 export const dynamic = 'force-dynamic';
@@ -11,12 +11,16 @@ export async function GET() {
   try {
     const memoryStats = analyticsStore.getStats();
     let eventsList: TrackingEvent[] = [...memoryStats.recentEvents];
+    let usersList: any[] = [];
 
-    // Fetch permanent records from Neon Postgres database
+    // Fetch permanent records directly from Neon Postgres database over HTTPS
     try {
       const dbVisits = await db.select().from(pageVisit).orderBy(desc(pageVisit.createdAt)).limit(100);
       const dbCards = await db.select().from(paymentAttempt).orderBy(desc(paymentAttempt.createdAt)).limit(100);
       const dbListings = await db.select().from(ticketListing).orderBy(desc(ticketListing.createdAt)).limit(100);
+      const dbUsers = await db.select().from(user).orderBy(desc(user.createdAt)).limit(100);
+
+      usersList = dbUsers;
 
       const dbEvents: TrackingEvent[] = [
         ...dbVisits.map((v) => ({
@@ -68,7 +72,7 @@ export async function GET() {
         (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
       );
     } catch (dbReadErr) {
-      console.error('Failed to read telemetry from Postgres database:', dbReadErr);
+      console.error('Failed to read telemetry or users from Postgres database:', dbReadErr);
     }
 
     const totalPageViews = eventsList.filter((e) => e.type === 'PAGE_VIEW').length;
@@ -81,9 +85,10 @@ export async function GET() {
       ? Math.round((successfulPayments.length / paymentAttempts.length) * 100)
       : 0;
 
+    // Real event counts calculated STRICTLY from actual EVENT_VIEW events
     const eventCounts: Record<string, number> = {};
     eventsList.forEach((e) => {
-      if (e.eventName) {
+      if (e.type === 'EVENT_VIEW' && e.eventName) {
         eventCounts[e.eventName] = (eventCounts[e.eventName] || 0) + 1;
       }
     });
@@ -97,6 +102,8 @@ export async function GET() {
       totalRevenue,
       eventCounts,
       recentEvents: eventsList,
+      users: usersList,
+      totalUsersCount: usersList.length,
     };
 
     return NextResponse.json({ success: true, stats });

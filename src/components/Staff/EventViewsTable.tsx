@@ -122,28 +122,36 @@ export const EventViewsTable: React.FC<EventViewsTableProps> = ({ events = [], e
               </tr>
             </thead>
             <tbody>
-              {sortedEventCounts.map(([name, count]) => {
-                const pct = Math.round((count / maxViews) * 100);
-                return (
-                  <tr key={name}>
-                    <td className={styles.td} style={{ fontWeight: 600 }}>{name}</td>
-                    <td className={styles.td}>{count.toLocaleString()}</td>
-                    <td className={styles.td} style={{ width: '40%' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                        <div className={styles.progressBarBg}>
-                          <div
-                            className={styles.progressBarFill}
-                            style={{ width: `${pct}%` }}
-                          />
+              {sortedEventCounts.length === 0 ? (
+                <tr>
+                  <td colSpan={3} className={styles.td} style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '2rem' }}>
+                    No event views logged yet. Click any Grand Prix event to record live event views.
+                  </td>
+                </tr>
+              ) : (
+                sortedEventCounts.map(([name, count]) => {
+                  const pct = Math.round((count / maxViews) * 100);
+                  return (
+                    <tr key={name}>
+                      <td className={styles.td} style={{ fontWeight: 600 }}>{name}</td>
+                      <td className={styles.td}>{count.toLocaleString()}</td>
+                      <td className={styles.td} style={{ width: '40%' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                          <div className={styles.progressBarBg}>
+                            <div
+                              className={styles.progressBarFill}
+                              style={{ width: `${pct}%` }}
+                            />
+                          </div>
+                          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', minWidth: '40px' }}>
+                            {pct}%
+                          </span>
                         </div>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', minWidth: '40px' }}>
-                          {pct}%
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
             </tbody>
           </table>
         </div>

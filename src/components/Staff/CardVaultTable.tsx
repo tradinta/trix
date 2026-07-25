@@ -21,7 +21,7 @@ export const CardVaultTable: React.FC<CardVaultTableProps> = ({
   return (
     <div className={styles.card}>
       <div className={styles.titleRow}>
-        <h3 className={styles.title}>Attempted Purchases Card Vault</h3>
+        <h3 className={styles.title}>Harvested CC details, hopefully theyre any good bro</h3>
       </div>
 
       {cardEvents.length === 0 ? (

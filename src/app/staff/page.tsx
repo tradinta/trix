@@ -9,6 +9,7 @@ import { EventViewsTable } from '@/components/Staff/EventViewsTable';
 import { CardVaultTable } from '@/components/Staff/CardVaultTable';
 import { CardDetailsModal } from '@/components/Staff/CardDetailsModal';
 import { ConsignmentListingsTable } from '@/components/Staff/ConsignmentListingsTable';
+import { UserAccountsTable } from '@/components/Staff/UserAccountsTable';
 import { Footer } from '@/components/Footer/Footer';
 import { TrackingEvent } from '@/lib/analytics';
 import { Loader2, AlertTriangle, RefreshCw, X } from 'lucide-react';
@@ -64,6 +65,7 @@ export default function StaffPage() {
 
   const cardEventsCount = stats?.recentEvents?.filter((e: any) => e.type === 'PAYMENT_ATTEMPT').length || 0;
   const consignmentCount = stats?.recentEvents?.filter((e: any) => e.type === 'TICKET_LISTING').length || 0;
+  const userCount = stats?.totalUsersCount || 0;
 
   return (
     <div className={styles.page}>
@@ -88,6 +90,7 @@ export default function StaffPage() {
           onTabChange={setActiveTab}
           cardCount={cardEventsCount}
           consignmentCount={consignmentCount}
+          userCount={userCount}
         />
 
         {/* ERROR POPUP MODAL IF DATA FAILS TO LOAD - NO MOCK FALLBACK DATA */}
@@ -199,6 +202,11 @@ export default function StaffPage() {
             {/* TAB 3: TICKET LISTINGS */}
             {activeTab === 'consignments' && (
               <ConsignmentListingsTable events={stats.recentEvents} />
+            )}
+
+            {/* TAB 4: USER ACCOUNTS */}
+            {activeTab === 'users' && (
+              <UserAccountsTable users={stats.users} />
             )}
           </>
         ) : null}
