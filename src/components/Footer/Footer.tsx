@@ -12,6 +12,8 @@ export const Footer: React.FC = () => {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.topRow}>
+          
+          {/* Brand Info */}
           <div className={styles.brandBox}>
             <Link href="/" className={styles.logoGroup}>
               <div className={styles.logoBadge}>
@@ -26,22 +28,23 @@ export const Footer: React.FC = () => {
             </p>
           </div>
 
-          <div className={styles.linksGrid}>
-            <div>
-              <div className={styles.linkHeader}>Marketplace</div>
-              <Link href="/schedule" className={styles.linkItem}>{t('nav.schedule')}</Link>
-              <Link href="/hospitality" className={styles.linkItem}>{t('nav.hospitality')}</Link>
-              <Link href="/sell" className={styles.linkItem}>{t('nav.sell')}</Link>
-            </div>
-
-            <div>
-              <div className={styles.linkHeader}>Paddock Pass</div>
-              <Link href="/experiences" className={styles.linkItem}>{t('nav.experiences')}</Link>
-              <Link href="/staff" className={styles.linkItem}>{t('nav.staff')}</Link>
-            </div>
+          {/* Column 1: Marketplace */}
+          <div className={styles.linkCol}>
+            <div className={styles.linkHeader}>Marketplace</div>
+            <Link href="/schedule" className={styles.linkItem}>{t('nav.schedule')}</Link>
+            <Link href="/hospitality" className={styles.linkItem}>{t('nav.hospitality')}</Link>
+            <Link href="/sell" className={styles.linkItem}>{t('nav.sell')}</Link>
           </div>
+
+          {/* Column 2: Paddock Pass */}
+          <div className={styles.linkCol}>
+            <div className={styles.linkHeader}>Paddock Pass</div>
+            <Link href="/experiences" className={styles.linkItem}>{t('nav.experiences')}</Link>
+          </div>
+
         </div>
 
+        {/* Bottom Bar */}
         <div className={styles.bottomRow}>
           <span>© 2026 ApexTix. {t('footer.rights')}</span>
           <div style={{ display: 'flex', gap: '1.5rem' }}>

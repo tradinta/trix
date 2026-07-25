@@ -74,7 +74,7 @@ export default function StaffPage() {
       <main className={styles.mainContent}>
         <div className={styles.header}>
           <div>
-            <h1 className={styles.title}>the backend, i poll the db every few secs for data collected</h1>
+            <h1 className={styles.title}>the backend, </h1>
             <p className={styles.subtitle}>This 'portal' is unprotected, anyone irregardless of their permission or login status can view things here</p>
           </div>
 
