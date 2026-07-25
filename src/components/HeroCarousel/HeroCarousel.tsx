@@ -3,14 +3,23 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './HeroCarousel.module.css';
-import { races } from '@/data/races';
+import { GRAND_PRIX_EVENTS } from '@/data/races';
+import { GrandPrixEvent } from '@/types/f1';
 import { useLanguage } from '@/context/LanguageContext';
-import { Calendar, MapPin, ArrowRight, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Calendar, ArrowRight, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
 
-export const HeroCarousel: React.FC = () => {
+interface HeroCarouselProps {
+  events?: GrandPrixEvent[];
+  onSelectEvent?: (event: GrandPrixEvent) => void;
+}
+
+export const HeroCarousel: React.FC<HeroCarouselProps> = ({
+  events = GRAND_PRIX_EVENTS,
+  onSelectEvent,
+}) => {
   const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const featuredRaces = races.slice(0, 4);
+  const featuredRaces = events.slice(0, 4);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -19,7 +28,7 @@ export const HeroCarousel: React.FC = () => {
     return () => clearInterval(timer);
   }, [featuredRaces.length]);
 
-  const currentRace = featuredRaces[currentIndex];
+  const currentRace = featuredRaces[currentIndex] || events[0];
 
   return (
     <div className={styles.heroSection}>
@@ -47,10 +56,20 @@ export const HeroCarousel: React.FC = () => {
           <p className={styles.heroSub}>{t('home.heroSubtitle')}</p>
 
           <div className={styles.btnRow}>
-            <Link href={`/races/${currentRace.id}`} className={styles.primaryBtn}>
-              <span>{t('home.explorePasses')} ({currentRace.name})</span>
-              <ArrowRight size={18} />
-            </Link>
+            {onSelectEvent ? (
+              <button
+                onClick={() => onSelectEvent(currentRace)}
+                className={styles.primaryBtn}
+              >
+                <span>{t('home.explorePasses')} ({currentRace.name})</span>
+                <ArrowRight size={18} />
+              </button>
+            ) : (
+              <Link href={`/races/${currentRace.id}`} className={styles.primaryBtn}>
+                <span>{t('home.explorePasses')} ({currentRace.name})</span>
+                <ArrowRight size={18} />
+              </Link>
+            )}
 
             <Link href="/schedule" className={styles.secondaryBtn}>
               <Calendar size={18} />
