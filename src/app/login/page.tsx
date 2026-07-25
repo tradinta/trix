@@ -30,9 +30,9 @@ export default function LoginPage() {
         {/* Form Container Wrapper */}
         <div className={styles.formWrapper}>
           {view === 'login' ? (
-            <LoginForm onToggleToRegister={() => setView('register')} />
+            <LoginForm onSwitchToRegister={() => setView('register')} />
           ) : (
-            <RegisterForm onToggleToLogin={() => setView('login')} />
+            <RegisterForm onSwitchToLogin={() => setView('login')} />
           )}
         </div>
       </div>
