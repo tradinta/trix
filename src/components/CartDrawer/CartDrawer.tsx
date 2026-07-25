@@ -3,7 +3,8 @@
 import React from 'react';
 import styles from './CartDrawer.module.css';
 import { CartItem } from '@/types/f1';
-import { X, ShoppingBag, Trash2, ArrowRight } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
+import { X, Trash2, Plus, Minus, Lock, ShoppingBag } from 'lucide-react';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -22,21 +23,23 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   onRemoveItem,
   onProceedToCheckout,
 }) => {
+  const { t } = useLanguage();
   if (!isOpen) return null;
 
-  const subtotal = items.reduce((acc, item) => acc + item.totalPrice, 0);
-  const tax = Math.round(subtotal * 0.08);
-  const total = subtotal + tax;
+  const subtotal = items.reduce((acc, i) => acc + i.totalPrice, 0);
 
   return (
     <div className={styles.overlay}>
+      <div className={styles.backdrop} onClick={onClose} />
+
       <div className={styles.drawer}>
         
-        {/* Header */}
+        {/* Drawer Header */}
         <div className={styles.header}>
-          <div className={styles.titleGroup}>
+          <div className={styles.titleRow}>
             <ShoppingBag size={20} color="#e10600" />
-            <h3 className={styles.title}>Your Ticket Bag</h3>
+            <h2 className={styles.title}>{t('cart.title')}</h2>
+            <span className={styles.itemCount}>({items.length})</span>
           </div>
 
           <button onClick={onClose} className={styles.closeBtn}>
@@ -44,79 +47,72 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
           </button>
         </div>
 
-        {/* Body */}
+        {/* Cart Items List */}
         <div className={styles.body}>
           {items.length === 0 ? (
             <div className={styles.emptyState}>
-              <ShoppingBag size={48} opacity={0.3} />
-              <p>Your bag is empty</p>
+              <ShoppingBag size={48} color="var(--text-muted)" />
+              <h3 className={styles.emptyTitle}>{t('cart.emptyTitle')}</h3>
+              <p className={styles.emptySub}>{t('cart.emptySub')}</p>
             </div>
           ) : (
-            items.map((item) => (
-              <div key={item.id} className={styles.cartItem}>
-                <div className={styles.itemHeader}>
-                  <div>
-                    <span className={styles.eventName}>{item.eventName}</span>
-                    <h4 className={styles.standName}>{item.grandstandName}</h4>
-                    <p className={styles.passType}>{item.passType}</p>
-                  </div>
+            <div className={styles.itemList}>
+              {items.map((item) => (
+                <div key={item.id} className={styles.cartCard}>
+                  <div className={styles.cardHeader}>
+                    <div>
+                      <h4 className={styles.eventName}>{item.eventName}</h4>
+                      <div className={styles.tierName}>{item.grandstandName}</div>
+                      <div className={styles.passType}>{item.passType}</div>
+                    </div>
 
-                  <button
-                    onClick={() => onRemoveItem(item.id)}
-                    className={styles.removeBtn}
-                  >
-                    <Trash2 size={16} />
-                  </button>
-                </div>
-
-                <div className={styles.itemFooter}>
-                  <div className={styles.qtyControls}>
                     <button
-                      onClick={() => onUpdateQuantity(item.id, -1)}
-                      className={styles.qtyBtn}
+                      onClick={() => onRemoveItem(item.id)}
+                      className={styles.removeBtn}
+                      title={t('cart.removeBtn')}
                     >
-                      -
-                    </button>
-                    <span className={styles.qtyVal}>{item.quantity}</span>
-                    <button
-                      onClick={() => onUpdateQuantity(item.id, 1)}
-                      className={styles.qtyBtn}
-                    >
-                      +
+                      <Trash2 size={16} />
                     </button>
                   </div>
 
-                  <span className={styles.price}>${item.totalPrice}</span>
+                  <div className={styles.cardFooter}>
+                    <div className={styles.qtyBox}>
+                      <button
+                        onClick={() => onUpdateQuantity(item.id, -1)}
+                        className={styles.qtyBtn}
+                      >
+                        <Minus size={14} />
+                      </button>
+                      <span className={styles.qtyVal}>{item.quantity}</span>
+                      <button
+                        onClick={() => onUpdateQuantity(item.id, 1)}
+                        className={styles.qtyBtn}
+                      >
+                        <Plus size={14} />
+                      </button>
+                    </div>
+
+                    <div className={styles.priceVal}>
+                      ${item.totalPrice.toLocaleString()}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))
+              ))}
+            </div>
           )}
         </div>
 
-        {/* Footer */}
+        {/* Drawer Footer */}
         {items.length > 0 && (
           <div className={styles.footer}>
-            <div className={styles.summaryRow}>
-              <span>Subtotal</span>
-              <span>${subtotal}</span>
-            </div>
-            <div className={styles.summaryRow}>
-              <span>Digital E-Pass</span>
-              <span style={{ color: '#10b981', fontWeight: 600 }}>FREE</span>
-            </div>
-            <div className={styles.summaryRow}>
-              <span>Estimated Tax (8%)</span>
-              <span>${tax}</span>
-            </div>
-
-            <div className={styles.totalRow}>
-              <span>Total</span>
-              <span style={{ color: '#e10600', fontFamily: 'monospace' }}>${total}</span>
+            <div className={styles.subtotalRow}>
+              <span>{t('checkout.subtotal')}</span>
+              <span className={styles.subtotalVal}>${subtotal.toLocaleString()}</span>
             </div>
 
             <button onClick={onProceedToCheckout} className={styles.checkoutBtn}>
-              <span>Proceed To Checkout</span>
-              <ArrowRight size={16} />
+              <Lock size={16} />
+              <span>{t('cart.checkoutBtn')}</span>
             </button>
           </div>
         )}

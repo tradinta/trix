@@ -18,6 +18,20 @@ export const en = {
     ongoing: 'Ongoing Now',
     debutRace: 'Debut Race',
   },
+  // Home & Hero
+  home: {
+    badge: 'Official 2026 Championship Passes',
+    heroTitle: 'Official Formula 1 Ticket Exchange',
+    heroSubtitle: 'Direct access to Grandstand, VIP Paddock Club, and Team Suites across 24 Grand Prix destinations.',
+    explorePasses: 'Explore Passes',
+    viewSchedule: 'View Schedule',
+    feature1Title: '100% Guaranteed Passes',
+    feature1Desc: 'Direct integration with circuit ticketing authority and Cloudflare R2 file verification.',
+    feature2Title: 'Live Payout Calculator',
+    feature2Desc: 'Instant payout calculations with guaranteed seller protection.',
+    feature3Title: 'Digital Pass Locker',
+    feature3Desc: 'Instant barcode generation and offline mobile wallet access for circuit gate entry.',
+  },
   // Schedule Page
   schedule: {
     title: '2026 World Championship',
@@ -26,6 +40,27 @@ export const en = {
     laps: 'laps',
     circuitLength: 'Circuit Length',
     lapRecord: 'Lap Record',
+    startingFrom: 'Starting From',
+  },
+  // Hospitality Page
+  hospitality: {
+    title: 'Paddock Club & Team Suites',
+    subtitle: 'Ultra-exclusive VIP hospitality packages with pit lane walks and gourmet catering.',
+    paddockClubTitle: 'Paddock Club™ Experience',
+    paddockClubDesc: 'Above team garages with open bar and pit lane access.',
+    teamSuitesTitle: 'Team Hospitality Suites',
+    teamSuitesDesc: 'Direct access to Ferrari, Red Bull, and Mercedes hospitality suites.',
+    bookVip: 'Reserve VIP Suite',
+  },
+  // Experiences Page
+  experiences: {
+    title: 'Trackside Experiences',
+    subtitle: 'Exclusive pit lane walks, podium celebrations, and driver Q&A sessions.',
+    pitWalkTitle: 'Guided Pit Lane Walk',
+    pitWalkDesc: 'Walk the pit lane on Thursday before green light.',
+    podiumTitle: 'Podium Celebration Access',
+    podiumDesc: 'Stand directly under the champagne podium at race finish.',
+    exploreBtn: 'Explore Experience',
   },
   // Checkout Modal
   checkout: {
@@ -45,6 +80,26 @@ export const en = {
     securedSub: 'Your Grand Prix tickets are confirmed.',
     viewTickets: 'View Mobile Tickets',
     returnHome: 'Return Home',
+  },
+  // Cart Drawer
+  cart: {
+    title: 'Your Shopping Bag',
+    emptyTitle: 'Your bag is empty',
+    emptySub: 'Explore our 2026 Grand Prix schedule to reserve passes.',
+    checkoutBtn: 'Proceed to Checkout',
+    removeBtn: 'Remove',
+    qty: 'Qty',
+  },
+  // Pass Locker
+  locker: {
+    title: 'Digital Ticket Locker',
+    subtitle: 'Show barcode at circuit gate entry.',
+    validPass: 'VERIFIED PASS',
+    orderRef: 'Order Ref',
+    holder: 'Ticket Holder',
+    gate: 'Gate Entry',
+    sector: 'Sector / Row',
+    closeBtn: 'Close Locker',
   },
   // Sell Page
   sell: {
@@ -78,6 +133,20 @@ export const en = {
     alreadyHaveAccount: 'Already have an account?',
     createAccountBtn: 'Create an account',
     signInBtn: 'Sign In',
+  },
+  // Cookie & Language Consent Modal
+  cookieConsent: {
+    title: 'Welcome to ApexTix',
+    subtitle: 'Please select your preferred language and cookie settings to continue.',
+    selectLanguageLabel: 'Select Preferred Language',
+    cookieInfo: 'We use essential cookies to manage your shopping cart, language preferences, and secure ticket checkout.',
+    acceptAll: 'Accept & Continue',
+    essentialOnly: 'Essential Only',
+  },
+  // Footer
+  footer: {
+    brandDesc: 'Official Formula 1 ticket access and verified ticket exchange platform.',
+    rights: 'All rights reserved.',
   },
 };
 

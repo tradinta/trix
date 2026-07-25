@@ -1,135 +1,92 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import styles from './HeroCarousel.module.css';
-import { GrandPrixEvent } from '@/types/f1';
-import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { races } from '@/data/races';
+import { useLanguage } from '@/context/LanguageContext';
+import { Calendar, MapPin, ArrowRight, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
 
-interface HeroCarouselProps {
-  events: GrandPrixEvent[];
-  onSelectEvent: (event: GrandPrixEvent) => void;
-}
-
-export const HeroCarousel: React.FC<HeroCarouselProps> = ({
-  events,
-  onSelectEvent,
-}) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const heroEvents = events.slice(0, 3);
+export const HeroCarousel: React.FC = () => {
+  const { t } = useLanguage();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const featuredRaces = races.slice(0, 4);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroEvents.length);
-    }, 7000);
+      setCurrentIndex((prev) => (prev + 1) % featuredRaces.length);
+    }, 6000);
     return () => clearInterval(timer);
-  }, [heroEvents.length]);
+  }, [featuredRaces.length]);
 
-  const handleNext = () => {
-    setCurrentSlide((prev) => (prev + 1) % heroEvents.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentSlide((prev) => (prev - 1 + heroEvents.length) % heroEvents.length);
-  };
+  const currentRace = featuredRaces[currentIndex];
 
   return (
-    <header className={`${styles.carousel} bg-grid`}>
-      <div className={styles.gradientOverlay} />
-      <div className={styles.glowBlob} />
+    <div className={styles.heroSection}>
+      {/* Background Image Carousel */}
+      {featuredRaces.map((race, index) => (
+        <div
+          key={race.id}
+          className={`${styles.bgSlide} ${index === currentIndex ? styles.activeSlide : ''}`}
+          style={{ backgroundImage: `url(${race.heroImage})` }}
+        />
+      ))}
 
-      {heroEvents.map((event, index) => {
-        const isActive = index === currentSlide;
-        const bgWord = event.country.toUpperCase();
+      {/* Dark Gradient Overlay */}
+      <div className={styles.heroOverlay} />
 
-        return (
-          <div
-            key={event.id}
-            className={`${styles.slide} ${isActive ? styles.slideActive : ''}`}
-          >
-            {/* Background Parallax Word */}
-            <div className={styles.parallaxText}>{bgWord}</div>
-
-            <div className={styles.contentContainer}>
-              
-              {/* Status Badge */}
-              <div className={styles.statusTag}>
-                <span className={styles.liveDot}>
-                  <span className={styles.ping} />
-                  <span className={styles.dotCore} />
-                </span>
-                <span className={styles.statusText}>
-                  {event.status === 'Selling Fast' ? 'Race Weekend • Selling Fast' : '2026 Grand Prix'}
-                </span>
-              </div>
-
-              {/* Title */}
-              <h1 className={styles.title}>
-                {event.name.split(' ')[0]}<br />
-                <span className="silver-shine">Grand Prix</span>
-              </h1>
-
-              {/* Meta Info Row */}
-              <div className={styles.metaRow}>
-                <div className={styles.metaItem}>
-                  <span className={styles.metaLabel}>Date</span>
-                  <span className={styles.metaValue}>{event.dateRange}</span>
-                </div>
-                <div className={styles.divider} />
-                <div className={styles.metaItem}>
-                  <span className={styles.metaLabel}>Circuit</span>
-                  <span className={styles.metaValue}>{event.circuitName}, {event.location.split(',')[1]}</span>
-                </div>
-              </div>
-
-              {/* Buttons */}
-              <div className={styles.btnRow}>
-                <button
-                  onClick={() => onSelectEvent(event)}
-                  className={styles.primaryBtn}
-                >
-                  <span>Secure Tickets</span>
-                  <ArrowRight size={18} />
-                </button>
-                <button
-                  onClick={() => onSelectEvent(event)}
-                  className={styles.secondaryBtn}
-                >
-                  View Packages
-                </button>
-              </div>
-
-            </div>
+      {/* Content Container */}
+      <div className={styles.contentContainer}>
+        <div className={styles.contentInner}>
+          <div className={styles.badgeTag}>
+            <ShieldCheck size={14} color="#e10600" />
+            <span>{t('home.badge')}</span>
           </div>
-        );
-      })}
 
-      {/* Controls */}
-      <div className={styles.controls}>
-        {/* Dots */}
-        <div className={styles.dots}>
-          {heroEvents.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentSlide(idx)}
-              className={`${styles.dot} ${
-                idx === currentSlide ? styles.dotActive : styles.dotInactive
-              }`}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
-          ))}
+          <h1 className={styles.heroTitle}>{t('home.heroTitle')}</h1>
+          <p className={styles.heroSub}>{t('home.heroSubtitle')}</p>
+
+          <div className={styles.btnRow}>
+            <Link href={`/races/${currentRace.id}`} className={styles.primaryBtn}>
+              <span>{t('home.explorePasses')} ({currentRace.name})</span>
+              <ArrowRight size={18} />
+            </Link>
+
+            <Link href="/schedule" className={styles.secondaryBtn}>
+              <Calendar size={18} />
+              <span>{t('home.viewSchedule')}</span>
+            </Link>
+          </div>
         </div>
 
-        {/* Arrows */}
-        <div className={styles.arrows}>
-          <button onClick={handlePrev} className={styles.arrowBtn} aria-label="Previous slide">
-            <ChevronLeft size={20} />
-          </button>
-          <button onClick={handleNext} className={styles.arrowBtn} aria-label="Next slide">
-            <ChevronRight size={20} />
-          </button>
+        {/* Carousel Slide Controls */}
+        <div className={styles.carouselNav}>
+          <div className={styles.slideIndicators}>
+            {featuredRaces.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentIndex(idx)}
+                className={`${styles.dot} ${idx === currentIndex ? styles.activeDot : ''}`}
+              />
+            ))}
+          </div>
+
+          <div className={styles.arrowGroup}>
+            <button
+              onClick={() => setCurrentIndex((prev) => (prev === 0 ? featuredRaces.length - 1 : prev - 1))}
+              className={styles.arrowBtn}
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button
+              onClick={() => setCurrentIndex((prev) => (prev + 1) % featuredRaces.length)}
+              className={styles.arrowBtn}
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
         </div>
       </div>
-    </header>
+    </div>
   );
 };

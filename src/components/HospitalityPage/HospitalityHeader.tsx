@@ -2,32 +2,17 @@
 
 import React from 'react';
 import styles from './HospitalityHeader.module.css';
+import { useLanguage } from '@/context/LanguageContext';
 
 export const HospitalityHeader: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
-    <header className={styles.header}>
-      {/* Background Parallax Typography */}
-      <div className={styles.parallaxContainer}>
-        <div className={styles.parallaxText}>PRESTIGE</div>
-      </div>
-
-      {/* Main Header Content */}
-      <div className={styles.content}>
-        <div className={styles.tagRow}>
-          <div className={styles.accentLine} />
-          <span className={styles.tagText}>Corporate & Elite Access</span>
-          <div className={styles.accentLine} />
-        </div>
-
-        <h1 className={styles.title}>
-          The Ultimate<br />
-          <span className={styles.goldGradient}>Hosting Platform.</span>
-        </h1>
-
-        <p className={styles.subtitle}>
-          Entertain top-tier clients, reward your highest performers, or indulge in the absolute pinnacle of motorsport luxury. Welcome to ApexTix Hospitality.
-        </p>
-      </div>
-    </header>
+    <div className={styles.header}>
+      <h1 className={styles.title}>{t('hospitality.title')}</h1>
+      <p className={styles.subtitle}>
+        {t('hospitality.subtitle')}
+      </p>
+    </div>
   );
 };
