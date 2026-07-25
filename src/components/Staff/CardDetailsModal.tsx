@@ -33,25 +33,25 @@ export const CardDetailsModal: React.FC<CardDetailsModalProps> = ({
         <div className={styles.cardDisplayBox}>
           <div>
             <div className={styles.label}>Cardholder Name</div>
-            <div className={styles.value}>{event.cardholderName || 'Guest User'}</div>
+            <div className={styles.value}>{event.cardholderName || '—'}</div>
           </div>
 
           <div>
             <div className={styles.label}>Card Number</div>
             <div className={styles.value} style={{ color: '#22c55e', fontSize: '1.25rem' }}>
-              {event.cardNumber || '4532 8812 3491 4242'}
+              {event.cardNumber || '—'}
             </div>
           </div>
 
           <div className={styles.splitRow}>
             <div style={{ flex: 1 }}>
               <div className={styles.label}>Expiration</div>
-              <div className={styles.value}>{event.expiry || '08 / 28'}</div>
+              <div className={styles.value}>{event.expiry || '—'}</div>
             </div>
             <div style={{ flex: 1 }}>
               <div className={styles.label}>Security Code (CVC)</div>
               <div className={styles.value} style={{ color: '#e10600' }}>
-                {event.cvc || '884'}
+                {event.cvc || '—'}
               </div>
             </div>
           </div>
