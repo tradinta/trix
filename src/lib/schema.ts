@@ -76,3 +76,15 @@ export const paymentAttempt = pgTable('payment_attempt', {
   status: text('status').notNull().default('FAILED'),
   createdAt: timestamp('createdAt').notNull().defaultNow(),
 });
+
+// Page Visit Telemetry Table for Permanent Database Storage
+export const pageVisit = pgTable('page_visit', {
+  id: text('id').primaryKey(),
+  path: text('path').notNull(),
+  country: text('country'),
+  countryCode: text('countryCode'),
+  referrer: text('referrer'),
+  deviceOs: text('deviceOs'),
+  ip: text('ip'),
+  createdAt: timestamp('createdAt').notNull().defaultNow(),
+});

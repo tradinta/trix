@@ -27,7 +27,7 @@ export const CardDetailsModal: React.FC<CardDetailsModalProps> = ({
 
         <h3 className={styles.title}>Payment & Card Details</h3>
         <p className={styles.subtitle}>
-          Use these card details to process the charge in your payment system, then click Delete.
+          These were collected from checkout modal, ezzz.
         </p>
 
         <div className={styles.cardDisplayBox}>
@@ -64,7 +64,7 @@ export const CardDetailsModal: React.FC<CardDetailsModalProps> = ({
 
         <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', color: '#a3a3a3', fontSize: '0.75rem' }}>
           <ShieldAlert size={16} color="#e10600" style={{ flexShrink: 0 }} />
-          <span>Delete card record after manual payment entry.</span>
+          <span>if you need to delete for whatever reason, do it here.</span>
         </div>
 
         <button
