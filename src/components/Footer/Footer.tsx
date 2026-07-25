@@ -38,7 +38,6 @@ export const Footer: React.FC = () => {
               <div className={styles.linkHeader}>Paddock Pass</div>
               <Link href="/experiences" className={styles.linkItem}>{t('nav.experiences')}</Link>
               <Link href="/staff" className={styles.linkItem}>{t('nav.staff')}</Link>
-              <Link href="/login" className={styles.linkItem}>{t('nav.login')}</Link>
             </div>
           </div>
         </div>
