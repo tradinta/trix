@@ -5,7 +5,6 @@ import Link from 'next/link';
 import styles from './HeroCarousel.module.css';
 import { GRAND_PRIX_EVENTS } from '@/data/races';
 import { GrandPrixEvent } from '@/types/f1';
-import { useLanguage } from '@/context/LanguageContext';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface HeroCarouselProps {
@@ -17,7 +16,6 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
   events = GRAND_PRIX_EVENTS,
   onSelectEvent,
 }) => {
-  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const featuredRaces = events.slice(0, 4);
 
@@ -28,55 +26,84 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
     return () => clearInterval(timer);
   }, [featuredRaces.length]);
 
-  const currentRace = featuredRaces[currentIndex] || events[0];
-
-  const getParallaxText = (name: string) => {
-    if (name.includes('Hungarian')) return 'HUNGARY';
-    if (name.includes('Dutch')) return 'ZANDVOORT';
-    if (name.includes('Italian')) return 'MONZA';
-    if (name.includes('Spanish')) return 'MADRID';
-    return name.toUpperCase();
-  };
+  const slideConfigs = [
+    {
+      statusText: 'Race Weekend • Ongoing',
+      statusColor: '#e10600',
+      glowBg: 'rgba(225, 6, 0, 0.2)',
+      parallaxText: 'HUNGARY',
+      btnStyle: 'red',
+      btnText: 'Secure Tickets',
+      showSecondBtn: true,
+    },
+    {
+      statusText: 'Next Race',
+      statusColor: '#f97316',
+      glowBg: 'rgba(234, 88, 12, 0.1)',
+      parallaxText: 'ZANDVOORT',
+      btnStyle: 'white',
+      btnText: 'Buy Tickets',
+      showSecondBtn: false,
+    },
+    {
+      statusText: 'Selling Fast',
+      statusColor: '#eab308',
+      glowBg: 'rgba(220, 38, 38, 0.15)',
+      parallaxText: 'MONZA',
+      btnStyle: 'white',
+      btnText: 'Buy Tickets',
+      showSecondBtn: false,
+    },
+    {
+      statusText: 'Upcoming Race',
+      statusColor: '#9ca3af',
+      glowBg: 'rgba(202, 138, 4, 0.1)',
+      parallaxText: 'MADRID',
+      btnStyle: 'white',
+      btnText: 'Buy Tickets',
+      showSecondBtn: false,
+    },
+  ];
 
   return (
-    <header className={styles.carousel}>
+    <header className={styles.carousel} id="carousel">
       {featuredRaces.map((race, index) => {
         const isActive = index === currentIndex;
-        const parallaxText = getParallaxText(race.name);
+        const config = slideConfigs[index] || slideConfigs[0];
 
         return (
           <div
             key={race.id}
             className={`${styles.carouselSlide} ${styles.bgGrid} ${isActive ? styles.carouselSlideActive : ''}`}
+            data-index={index}
           >
-            {/* Background Image */}
-            <div
-              className={styles.bgSlideImage}
-              style={{ backgroundImage: `url(${race.heroImage})` }}
-            />
-
-            {/* Gradient Overlay */}
+            {/* Background Gradient Overlay */}
             <div className={styles.gradientRight} />
             <div className={styles.gradientTop} />
 
-            {/* Glowing Red Blob */}
-            <div className={styles.glowBlob} />
+            {/* Glowing Colored Blob */}
+            <div
+              className={styles.glowBlob}
+              style={{ backgroundColor: config.glowBg }}
+            />
 
-            {/* Parallax Background Text */}
+            {/* Parallax Background Outline Text */}
             <div className={styles.parallaxBgText}>
-              {parallaxText}
+              {config.parallaxText}
             </div>
 
-            {/* Slide Content */}
+            {/* Content Box */}
             <div className={styles.container}>
               {/* Status Tag */}
               <div className={styles.statusRow}>
-                <span className={styles.livePing}>
-                  <span className={styles.pingPulse} />
-                  <span className={styles.pingDot} />
-                </span>
-                <span className={styles.statusText}>
-                  {index === 0 ? 'Race Weekend • Ongoing' : 'Upcoming Race'}
+                {index === 0 && (
+                  <span className={styles.livePing}>
+                    <span className={styles.pingPulse} />
+                    <span className={styles.pingDot} />
+                  </span>
+                )}
+                <span className={styles.statusText} style={{ color: config.statusColor }}>
+                  {config.statusText}
                 </span>
               </div>
 
@@ -86,7 +113,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
                 <span className={styles.silverShine}>Grand Prix</span>
               </h1>
 
-              {/* Meta Info Row */}
+              {/* Meta Row */}
               <div className={styles.metaRow}>
                 <div className={styles.metaCol}>
                   <span className={styles.metaLabel}>Date</span>
@@ -104,21 +131,26 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
                 {onSelectEvent ? (
                   <button
                     onClick={() => onSelectEvent(race)}
-                    className={styles.primaryBtn}
+                    className={config.btnStyle === 'red' ? styles.primaryBtnRed : styles.primaryBtnWhite}
                   >
-                    <span>Secure Tickets</span>
-                    <ArrowRight size={18} />
+                    <span>{config.btnText}</span>
+                    <ArrowRight size={20} />
                   </button>
                 ) : (
-                  <Link href={`/races/${race.id}`} className={styles.primaryBtn}>
-                    <span>Secure Tickets</span>
-                    <ArrowRight size={18} />
+                  <Link
+                    href={`/races/${race.id}`}
+                    className={config.btnStyle === 'red' ? styles.primaryBtnRed : styles.primaryBtnWhite}
+                  >
+                    <span>{config.btnText}</span>
+                    <ArrowRight size={20} />
                   </Link>
                 )}
 
-                <Link href="/schedule" className={styles.secondaryBtn}>
-                  <span>View Packages</span>
-                </Link>
+                {config.showSecondBtn && (
+                  <Link href="/schedule" className={styles.secondaryBtn}>
+                    <span>View Packages</span>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -127,7 +159,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
 
       {/* Controls */}
       <div className={styles.controls}>
-        <div className={styles.dots}>
+        <div className={styles.dots} id="carousel-dots">
           {featuredRaces.map((_, idx) => (
             <button
               key={idx}
@@ -141,6 +173,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
           <button
             onClick={() => setCurrentIndex((prev) => (prev === 0 ? featuredRaces.length - 1 : prev - 1))}
             className={styles.arrowBtn}
+            aria-label="Previous Slide"
           >
             <ChevronLeft size={20} />
           </button>
@@ -148,6 +181,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
           <button
             onClick={() => setCurrentIndex((prev) => (prev + 1) % featuredRaces.length)}
             className={styles.arrowBtn}
+            aria-label="Next Slide"
           >
             <ChevronRight size={20} />
           </button>
