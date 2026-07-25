@@ -90,7 +90,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
               <div className={styles.metaRow}>
                 <div className={styles.metaCol}>
                   <span className={styles.metaLabel}>Date</span>
-                  <span className={styles.metaVal}>{race.dates}</span>
+                  <span className={styles.metaVal}>{race.dateRange}</span>
                 </div>
                 <div className={styles.divider} />
                 <div className={styles.metaCol}>
