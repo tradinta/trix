@@ -88,7 +88,7 @@ export default function StaffPage() {
             {activeTab === 'analytics' && (
               <>
                 <StaffMetricsGrid stats={stats} />
-                <EventViewsTable eventCounts={stats.eventCounts} />
+                <EventViewsTable events={stats.recentEvents} eventCounts={stats.eventCounts} />
               </>
             )}
 

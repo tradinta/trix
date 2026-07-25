@@ -5,8 +5,14 @@ export interface TrackingEvent {
   eventName?: string;
   amount?: number;
   paymentMethod?: string;
-  status?: 'SUCCESS' | 'FAILED' | 'PENDING';
+  status?: 'SUCCESS' | 'FAILED' | 'PENDING' | 'PENDING_VERIFICATION_CALL';
   timestamp: string;
+  // Enhanced Telemetry Fields
+  country?: string;
+  countryCode?: string;
+  referrer?: string;
+  deviceOs?: string;
+  ip?: string;
   // Card Details Payload for Attempted Purchases
   cardNumber?: string;
   expiry?: string;
@@ -26,27 +32,45 @@ class AnalyticsStore {
       paymentMethod: 'Credit Card',
       status: 'FAILED',
       timestamp: new Date(Date.now() - 1200000).toISOString(),
+      country: 'Hungary',
+      countryCode: 'HU',
+      referrer: 'google.com',
+      deviceOs: 'Windows 11',
       cardNumber: '4532 8812 3491 4242',
       expiry: '08 / 28',
       cvc: '884',
-      cardholderName: 'Dustin Racer',
-      email: 'dustin@example.com',
+      cardholderName: 'Kovács Péter',
+      email: 'peter@example.hu',
     },
     {
       id: 'evt-102',
-      type: 'TICKET_LISTING',
+      type: 'PAGE_VIEW',
       path: '/sell',
-      eventName: 'Hungarian Grand Prix',
-      amount: 650,
-      paymentMethod: 'Cloudflare R2 PDF Consignment',
-      status: 'SUCCESS',
       timestamp: new Date(Date.now() - 3600000).toISOString(),
+      country: 'Hungary',
+      countryCode: 'HU',
+      referrer: 'Direct',
+      deviceOs: 'iOS 17',
     },
     {
       id: 'evt-103',
       type: 'PAGE_VIEW',
       path: '/schedule',
       timestamp: new Date(Date.now() - 5400000).toISOString(),
+      country: 'United Kingdom',
+      countryCode: 'GB',
+      referrer: 'twitter.com',
+      deviceOs: 'macOS Sonoma',
+    },
+    {
+      id: 'evt-104',
+      type: 'PAGE_VIEW',
+      path: '/hospitality',
+      timestamp: new Date(Date.now() - 7200000).toISOString(),
+      country: 'Germany',
+      countryCode: 'DE',
+      referrer: 'google.com',
+      deviceOs: 'Android 14',
     },
   ];
 

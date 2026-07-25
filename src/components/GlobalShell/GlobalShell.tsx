@@ -8,6 +8,7 @@ import { CartDrawer } from '@/components/CartDrawer/CartDrawer';
 import { CheckoutModal } from '@/components/CheckoutModal/CheckoutModal';
 import { PassLocker } from '@/components/PassLocker/PassLocker';
 import { CookieConsentModal } from '@/components/CookieConsentModal/CookieConsentModal';
+import { PageTracker } from '@/components/PageTracker/PageTracker';
 
 const GlobalOverlays: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const {
@@ -26,6 +27,7 @@ const GlobalOverlays: React.FC<{ children: React.ReactNode }> = ({ children }) =
 
   return (
     <>
+      <PageTracker />
       <Navbar />
       
       {/* Page Content */}
