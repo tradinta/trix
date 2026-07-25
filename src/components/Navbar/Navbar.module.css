@@ -1,0 +1,336 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5rem;
+  z-index: 100;
+  background-color: var(--navbar-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Brand Logo */
+.logoGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none !important;
+  color: var(--text-primary) !important;
+}
+
+.logoBadge {
+  width: 2.25rem;
+  height: 2.25rem;
+  background-color: #e10600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  transform: skewX(-15deg);
+  box-shadow: 0 0 15px rgba(225, 6, 0, 0.4);
+}
+
+.logoLetter {
+  font-family: 'Syncopate', sans-serif;
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: #ffffff !important;
+  transform: skewX(15deg);
+}
+
+.brandName {
+  font-family: 'Syncopate', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-primary) !important;
+}
+
+.brandSub {
+  color: var(--text-secondary) !important;
+}
+
+/* Nav Links Container (Desktop) */
+.navLinks {
+  display: none;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .navLinks {
+    display: flex;
+  }
+}
+
+.linkItem {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary) !important;
+  text-decoration: none !important;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+}
+
+.linkItem:hover {
+  color: var(--text-primary) !important;
+  text-decoration: none !important;
+}
+
+.linkItem::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #e10600;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(-50%);
+}
+
+.linkItem:hover::after {
+  width: 100%;
+}
+
+/* Actions Group */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.loginBtn {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--text-primary) !important;
+  text-decoration: none !important;
+  padding: 0.5rem 0.875rem;
+  border-radius: 2px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.loginBtn:hover {
+  border-color: var(--f1-red);
+  color: var(--f1-red) !important;
+}
+
+/* User Avatar Button (Displays FIRST LETTER ONLY) */
+.userAvatarBtn {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #e10600;
+  color: #ffffff !important;
+  border: 1px solid rgba(225, 6, 0, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 10px rgba(225, 6, 0, 0.3);
+}
+
+.userAvatarBtn:hover {
+  transform: scale(1.05);
+  background-color: #ff1801;
+}
+
+.avatarLetter {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.avatarSignOutIcon {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  background-color: #0a0a0a;
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 2px;
+  opacity: 0.8;
+}
+
+.iconBtn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 2px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  color: var(--text-primary) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.iconBtn:hover {
+  border-color: var(--text-primary);
+}
+
+/* Cart Button (ICON ONLY - NO BAG TEXT) */
+.cartBtn {
+  height: 2.5rem;
+  width: 2.5rem;
+  background-color: var(--text-primary);
+  color: var(--bg-dark) !important;
+  border: none;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cartBtn:hover {
+  opacity: 0.9;
+}
+
+.cartBadge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background-color: #e10600;
+  color: #ffffff !important;
+  font-size: 0.65rem;
+  font-weight: 700;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 6px rgba(225, 6, 0, 0.6);
+}
+
+/* Mobile Hamburger Toggle */
+.mobileMenuToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .mobileMenuToggle {
+    display: none;
+  }
+}
+
+/* Stylish Mobile Jumbotron Overlay */
+.mobileJumbotron {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(10, 10, 10, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+  animation: fadeInJumbotron 0.3s ease-out forwards;
+}
+
+@keyframes fadeInJumbotron {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.jumbotronHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.closeJumbotronBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.jumbotronBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: auto 0;
+  padding: 2rem 0;
+}
+
+.jumbotronTag {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #e10600;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.jumbotronLink {
+  font-family: 'Syncopate', sans-serif;
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-decoration: none !important;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.jumbotronLink:hover {
+  color: #e10600;
+  transform: translateX(6px);
+}
+
+.jumbotronFooter {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -1,0 +1,146 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.title {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
+  color: #ffffff;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: #a3a3a3;
+  margin-bottom: 2rem;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #a3a3a3;
+  font-family: monospace;
+}
+
+.selectInput {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  padding: 1rem;
+  border-radius: 2px;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.selectInput:focus {
+  outline: none;
+  border-color: #e10600;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 15px rgba(225, 6, 0, 0.15);
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.categoryRadio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.categoryBox {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 2px;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.categoryBox:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.categoryRadio:checked + .categoryBox {
+  background: rgba(225, 6, 0, 0.15);
+  border-color: #e10600;
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 0 15px rgba(225, 6, 0, 0.2);
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .grid2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.textInput {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  padding: 1rem;
+  border-radius: 2px;
+  font-size: 0.875rem;
+}
+
+.textInput:focus {
+  outline: none;
+  border-color: #e10600;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 15px rgba(225, 6, 0, 0.15);
+}
+
+.textInput::placeholder {
+  color: #666666;
+}
+
+.nextBtn {
+  width: 100%;
+  margin-top: 2rem;
+  background-color: #ffffff;
+  color: #0a0a0a;
+  border: none;
+  padding: 1rem;
+  border-radius: 2px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.nextBtn:hover {
+  background-color: #e5e5e5;
+}

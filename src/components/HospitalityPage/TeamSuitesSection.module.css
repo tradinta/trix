@@ -1,0 +1,262 @@
+.section {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg-dark);
+}
+
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    flex-direction: row;
+  }
+}
+
+/* Left Sticky Visual Anchor */
+.stickyAnchor {
+  width: 100%;
+  height: 50vh;
+  position: relative;
+  background-color: #0f0f0f;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-color);
+  background-image: 
+    linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@media (min-width: 1024px) {
+  .stickyAnchor {
+    width: 50%;
+    height: calc(100vh - 5rem);
+    position: sticky;
+    top: 5rem;
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+}
+
+.stickyVisual {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.6s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.stickyVisualActive {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Visual 1 Intro */
+.bgIntro {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(212, 175, 55, 0.15), transparent 70%);
+}
+
+/* Visual 2 Ferrari */
+.bgFerrari {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(220, 0, 0, 0.2), transparent 70%);
+}
+
+.ferrariShield {
+  width: 12rem;
+  height: 16rem;
+  border: 2px solid rgba(220, 0, 0, 0.4);
+  transform: skewX(-15deg);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ferrariLine {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: #DC0000;
+  box-shadow: 0 0 10px #DC0000;
+}
+
+/* Visual 3 Mercedes */
+.bgMercedes {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 161, 155, 0.2), transparent 70%);
+}
+
+/* Visual 4 Red Bull */
+.bgRedbull {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(6, 0, 239, 0.25), transparent 70%);
+}
+
+.redbullCore {
+  width: 12rem;
+  height: 12rem;
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.redbullPulse {
+  position: absolute;
+  inset: -2rem;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 50%;
+  animation: ping 3s linear infinite;
+}
+
+@keyframes ping {
+  75%, 100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Right Scrolling Content */
+.scrollingContent {
+  width: 100%;
+  padding: 4rem 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .scrollingContent {
+    width: 50%;
+    padding: 6rem 4rem;
+  }
+}
+
+.scrollBlock {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 6rem;
+}
+
+.blockTag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.blockTitle {
+  font-family: 'Syncopate', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.blockDesc {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.featureList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  padding-left: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+.listFerrari {
+  border-left: 2px solid rgba(220, 0, 0, 0.4);
+}
+
+.listMercedes {
+  border-left: 2px solid rgba(0, 161, 155, 0.4);
+}
+
+.listRedbull {
+  border-left: 2px solid rgba(6, 0, 239, 0.5);
+}
+
+.btnFerrari {
+  background: transparent;
+  border: 1px solid rgba(220, 0, 0, 0.5);
+  color: #ffffff;
+  padding: 0.875rem 2rem;
+  border-radius: 2px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  width: max-content;
+  transition: all 0.2s ease;
+}
+
+.btnFerrari:hover {
+  background-color: #DC0000;
+  color: #ffffff;
+}
+
+.btnMercedes {
+  background: transparent;
+  border: 1px solid rgba(0, 161, 155, 0.5);
+  color: #ffffff;
+  padding: 0.875rem 2rem;
+  border-radius: 2px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  width: max-content;
+  transition: all 0.2s ease;
+}
+
+.btnMercedes:hover {
+  background-color: #00A19B;
+  color: #ffffff;
+}
+
+.btnRedbull {
+  background: transparent;
+  border: 1px solid rgba(6, 0, 239, 0.5);
+  color: #ffffff;
+  padding: 0.875rem 2rem;
+  border-radius: 2px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  width: max-content;
+  transition: all 0.2s ease;
+}
+
+.btnRedbull:hover {
+  background-color: #0600EF;
+  color: #ffffff;
+}

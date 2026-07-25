@@ -1,0 +1,177 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-family: monospace;
+  text-transform: uppercase;
+  color: #a3a3a3;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: color 0.2s ease;
+}
+
+.backBtn:hover {
+  color: #ffffff;
+}
+
+.title {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
+  color: #ffffff;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: #a3a3a3;
+  margin-bottom: 2rem;
+}
+
+.calcCard {
+  background-color: #171717;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.priceLabel {
+  font-size: 0.75rem;
+  font-family: monospace;
+  text-transform: uppercase;
+  color: #a3a3a3;
+}
+
+.priceInputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.currencySymbol {
+  position: absolute;
+  left: 1rem;
+  font-weight: 700;
+  color: #a3a3a3;
+}
+
+.priceInput {
+  width: 100%;
+  background-color: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  padding: 1rem 1rem 1rem 2.5rem;
+  border-radius: 2px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.priceInput:focus {
+  outline: none;
+  border-color: #e10600;
+}
+
+.feeBreakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.875rem;
+}
+
+.feeRow {
+  display: flex;
+  justify-content: space-between;
+  color: #a3a3a3;
+}
+
+.payoutRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  padding-top: 0.5rem;
+}
+
+.payoutVal {
+  color: #4ade80;
+  font-family: 'Syncopate', sans-serif;
+}
+
+.disclaimer {
+  font-size: 0.7rem;
+  color: #737373;
+  line-height: 1.4;
+  margin-top: 0.5rem;
+}
+
+.dropArea {
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.03);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.dropAreaHover {
+  border-color: #e10600;
+  background-color: rgba(225, 6, 0, 0.05);
+}
+
+.dropAreaSuccess {
+  border-color: #4ade80;
+  background-color: rgba(74, 222, 128, 0.05);
+}
+
+.fileInputHidden {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.submitBtn {
+  width: 100%;
+  margin-top: 2rem;
+  background-color: #e10600;
+  color: #ffffff;
+  border: none;
+  padding: 1rem;
+  border-radius: 2px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.submitBtn:hover {
+  background-color: #ff1801;
+}

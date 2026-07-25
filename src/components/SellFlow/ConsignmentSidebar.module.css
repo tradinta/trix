@@ -1,0 +1,137 @@
+.sidebar {
+  display: none;
+  width: 41.666667%;
+  background-color: #171717;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+}
+
+@media (min-width: 1024px) {
+  .sidebar {
+    display: flex;
+  }
+}
+
+.glowBg {
+  position: absolute;
+  left: -8rem;
+  top: -8rem;
+  width: 24rem;
+  height: 24rem;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+}
+
+.topSection {
+  position: relative;
+  z-index: 10;
+}
+
+.title {
+  font-family: 'Syncopate', sans-serif;
+  font-size: clamp(2.25rem, 3.5vw, 3.25rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.description {
+  color: #a3a3a3;
+  font-weight: 300;
+  font-size: 1.125rem;
+  margin-bottom: 3rem;
+  max-width: 28rem;
+  line-height: 1.5;
+}
+
+.stepsList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.stepItem {
+  display: flex;
+  gap: 1rem;
+  transition: opacity 0.3s ease;
+}
+
+.stepActive {
+  opacity: 1;
+}
+
+.stepInactive {
+  opacity: 0.4;
+}
+
+.stepNum {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.stepTitle {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  color: #ffffff;
+}
+
+.stepDesc {
+  color: #a3a3a3;
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.protectionCard {
+  position: relative;
+  z-index: 10;
+  background-color: rgba(10, 10, 10, 0.6);
+  padding: 1.5rem;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto;
+}
+
+.protectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.protectionTitle {
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+}
+
+.protectionText {
+  font-size: 0.75rem;
+  color: #737373;
+  line-height: 1.5;
+}

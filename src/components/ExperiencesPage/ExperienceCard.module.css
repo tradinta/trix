@@ -1,0 +1,279 @@
+.spotlightCard {
+  position: relative;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .spotlightCard {
+    flex-direction: row;
+  }
+}
+
+.spotlightCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+    rgba(255, 255, 255, 0.06),
+    transparent 40%
+  );
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.spotlightCard:hover::before {
+  opacity: 1;
+}
+
+/* Left Visual Graphic Side */
+.leftVisual {
+  width: 100%;
+  min-height: 250px;
+  background-color: #0f0f0f;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .leftVisual {
+    width: 50%;
+    min-height: 500px;
+    border-bottom: none;
+    border-right: 1px solid var(--border-subtle);
+  }
+}
+
+.leftVisualReverse {
+  width: 100%;
+  min-height: 250px;
+  background-color: #0f0f0f;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .leftVisualReverse {
+    width: 50%;
+    min-height: 500px;
+    border-bottom: none;
+    border-left: 1px solid var(--border-subtle);
+  }
+}
+
+/* Right Content Side */
+.rightContent {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 1024px) {
+  .rightContent {
+    width: 50%;
+    padding: 4rem;
+  }
+}
+
+.tagGold {
+  color: #D4AF37;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background-color: rgba(212, 175, 55, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 2px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.tagRed {
+  color: var(--f1-red);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background-color: rgba(225, 6, 0, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 2px;
+  border: 1px solid rgba(225, 6, 0, 0.2);
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.tagBlue {
+  color: #60a5fa;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background-color: rgba(96, 165, 250, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 2px;
+  border: 1px solid rgba(96, 165, 250, 0.2);
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-family: 'Syncopate', sans-serif;
+  font-size: clamp(1.75rem, 3.5vw, 3rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.description {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.featureList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.bottomAction {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: space-between;
+}
+
+@media (min-width: 640px) {
+  .bottomAction {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.priceLabel {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.25rem;
+}
+
+.priceVal {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.btnGold {
+  background-color: #D4AF37;
+  color: var(--bg-dark);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 2px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .btnGold {
+    width: auto;
+  }
+}
+
+.btnGold:hover {
+  background-color: #b5952f;
+  color: #ffffff;
+}
+
+.btnWhite {
+  background-color: var(--text-primary);
+  color: var(--bg-dark);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 2px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .btnWhite {
+    width: auto;
+  }
+}
+
+.btnWhite:hover {
+  background-color: #e5e5e5;
+}
+
+.btnGlass {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 1rem 2rem;
+  border-radius: 2px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .btnGlass {
+    width: auto;
+  }
+}
+
+.btnGlass:hover {
+  border-color: var(--text-primary);
+  background-color: var(--text-primary);
+  color: var(--bg-dark);
+}

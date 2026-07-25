@@ -1,0 +1,195 @@
+.leftPanel {
+  width: 100%;
+  background-color: var(--bg-dark);
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+  height: 33.33%;
+}
+
+@media (min-width: 1024px) {
+  .leftPanel {
+    width: 40%;
+    height: 100%;
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+    padding: 3rem;
+  }
+}
+
+.topContent {
+  position: relative;
+  z-index: 20;
+}
+
+.backBtn {
+  display: none;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 3rem;
+  transition: color 0.2s ease;
+}
+
+@media (min-width: 1024px) {
+  .backBtn {
+    display: flex;
+  }
+}
+
+.backBtn:hover {
+  color: var(--f1-red);
+}
+
+.backLine {
+  width: 3rem;
+  height: 1px;
+  background-color: var(--text-primary);
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.backBtn:hover .backLine {
+  background-color: var(--f1-red);
+}
+
+.statusTag {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.liveDot {
+  position: relative;
+  display: flex;
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.ping {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: var(--f1-red);
+  opacity: 0.75;
+  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
+
+.dotCore {
+  position: relative;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--f1-red);
+}
+
+.statusText {
+  color: var(--f1-red);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: 'Syncopate', sans-serif;
+  font-size: clamp(2.25rem, 5vw, 5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-weight: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+}
+
+.trackArt {
+  position: absolute;
+  right: -4rem;
+  bottom: -4rem;
+  width: 120%;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (min-width: 1024px) {
+  .trackArt {
+    right: -8rem;
+    bottom: -8rem;
+    width: 150%;
+  }
+}
+
+.trackSvg {
+  width: 100%;
+  height: 100%;
+  stroke: var(--text-primary);
+  fill: none;
+}
+
+.trackPath {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 2.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.trackPathAnimate {
+  stroke-dashoffset: 0;
+}
+
+.bottomGuarantee {
+  position: relative;
+  z-index: 20;
+  display: none;
+  margin-top: auto;
+}
+
+@media (min-width: 1024px) {
+  .bottomGuarantee {
+    display: block;
+  }
+}
+
+.guaranteeLabel {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+}
+
+.guaranteeBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}

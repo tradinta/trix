@@ -1,0 +1,261 @@
+.rowVip {
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 1280px) {
+  .rowVip {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.rowVip::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #D4AF37 0%, #8C6D14 100%);
+}
+
+.rowVip:hover {
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.1);
+}
+
+.rowStandard {
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 1280px) {
+  .rowStandard {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.rowStandard:hover {
+  border-color: rgba(225, 6, 0, 0.4);
+  box-shadow: 0 0 25px rgba(225, 6, 0, 0.1);
+}
+
+.leftInfo {
+  padding-left: 0.5rem;
+  flex: 1;
+}
+
+.tagVip {
+  color: #D4AF37;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.tagRed {
+  color: var(--f1-red);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.tagGray {
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.title {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.subText {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  margin-top: 0.25rem;
+}
+
+.rightActions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+@media (min-width: 640px) {
+  .rightActions {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .rightActions {
+    padding-top: 0;
+    border-top: none;
+  }
+}
+
+.priceBlock {
+  text-align: left;
+}
+
+@media (min-width: 640px) {
+  .priceBlock {
+    text-align: right;
+  }
+}
+
+.priceVal {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: block;
+}
+
+.availVal {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.btnGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .btnGroup {
+    width: auto;
+  }
+}
+
+.sellBtn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  padding: 0.6rem 0.8rem;
+  border-radius: 2px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sellBtn:hover {
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.bagBtn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 2px;
+  border: 1px solid var(--border-color);
+  background-color: transparent;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.bagBtn:hover {
+  border-color: var(--text-primary);
+  background-color: var(--bg-surface-hover);
+}
+
+.buyNowBtnVip {
+  background-color: var(--text-primary);
+  color: var(--bg-dark);
+  border: none;
+  padding: 0.65rem 1.25rem;
+  border-radius: 2px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex: 1;
+}
+
+@media (min-width: 640px) {
+  .buyNowBtnVip {
+    flex: initial;
+  }
+}
+
+.buyNowBtnVip:hover {
+  background-color: #D4AF37;
+  color: #ffffff;
+}
+
+.buyNowBtnRed {
+  background-color: var(--text-primary);
+  color: var(--bg-dark);
+  border: none;
+  padding: 0.65rem 1.25rem;
+  border-radius: 2px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex: 1;
+}
+
+@media (min-width: 640px) {
+  .buyNowBtnRed {
+    flex: initial;
+  }
+}
+
+.buyNowBtnRed:hover {
+  background-color: var(--f1-red);
+  color: #ffffff;
+}

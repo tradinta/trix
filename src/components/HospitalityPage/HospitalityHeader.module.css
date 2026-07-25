@@ -1,0 +1,88 @@
+.header {
+  position: relative;
+  padding-top: 6rem;
+  padding-bottom: 5rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-dark);
+}
+
+.parallaxContainer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.parallaxText {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 16vw;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--border-color);
+  white-space: nowrap;
+  user-select: none;
+  line-height: 1;
+  opacity: 0.3;
+}
+
+.content {
+  position: relative;
+  z-index: 10;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.tagRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.accentLine {
+  width: 3rem;
+  height: 1px;
+  background-color: #D4AF37;
+}
+
+.tagText {
+  color: #D4AF37;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: 'Syncopate', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.goldGradient {
+  background: linear-gradient(135deg, #D4AF37 0%, #F3E5AB 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  font-weight: 300;
+  max-width: 42rem;
+  margin: 0 auto;
+  line-height: 1.6;
+}

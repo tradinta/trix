@@ -1,0 +1,229 @@
+.section {
+  position: relative;
+  z-index: 10;
+  background-color: var(--bg-dark);
+  padding: 6rem 0;
+}
+
+.container {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.headerRow {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+@media (min-width: 768px) {
+  .headerRow {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+
+.title {
+  font-family: 'Syncopate', sans-serif;
+  font-size: clamp(1.75rem, 3.5vw, 3rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+  font-weight: 300;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dotRed {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--f1-red);
+}
+
+.dotYellow {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: #eab308;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.itemCard {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 2px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: space-between;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .itemCard {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.itemCard:hover {
+  border-color: rgba(225, 6, 0, 0.3);
+  background-color: var(--bg-surface-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(225, 6, 0, 0.1);
+}
+
+.infoLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .infoLeft {
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+  }
+}
+
+.dateBlock {
+  display: flex;
+  flex-direction: column;
+  min-width: 130px;
+}
+
+.dateRange {
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.statusTag {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.statusSellingFast {
+  color: var(--f1-red);
+}
+
+.statusAvailable {
+  color: var(--text-secondary);
+}
+
+.statusLimited {
+  color: #eab308;
+}
+
+.raceTitle {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+}
+
+.itemCard:hover .raceTitle {
+  color: var(--f1-red);
+}
+
+.circuitLocation {
+  color: var(--text-secondary);
+  font-weight: 300;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.actionRight {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .actionRight {
+    width: auto;
+    justify-content: flex-end;
+  }
+}
+
+.priceBlock {
+  text-align: right;
+}
+
+.priceLabel {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+}
+
+.priceVal {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--text-primary);
+  font-family: monospace;
+}
+
+.selectBtn {
+  background-color: var(--text-primary);
+  color: var(--bg-dark);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.itemCard:hover .selectBtn {
+  background-color: var(--f1-red);
+  color: #ffffff;
+}

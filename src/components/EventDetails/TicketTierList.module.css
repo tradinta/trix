@@ -1,0 +1,204 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.headerTab {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 5rem;
+  background-color: var(--bg-dark);
+  z-index: 10;
+}
+
+.tabActive {
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--f1-red);
+  padding-bottom: 0.5rem;
+  background: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.cardVip {
+  background-color: var(--bg-surface);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 2px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.cardVip::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #D4AF37 0%, #8C6D14 100%);
+}
+
+.cardVip:hover {
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+  border-color: #D4AF37;
+}
+
+.cardStandard {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 2px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.cardStandard:hover {
+  border-color: rgba(225, 6, 0, 0.4);
+  box-shadow: 0 0 30px rgba(225, 6, 0, 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.categoryTagVip {
+  color: #D4AF37;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.categoryTagRed {
+  color: var(--f1-red);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.tierName {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.daysTag {
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 2px;
+  font-family: monospace;
+}
+
+.featureList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.bulletGold {
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background-color: #D4AF37;
+}
+
+.bulletRed {
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background-color: var(--f1-red);
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.priceText {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.priceUnit {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: sans-serif;
+  font-weight: 400;
+}
+
+.addBtnGold {
+  background-color: var(--text-primary);
+  color: var(--bg-dark);
+  border: none;
+  padding: 0.75rem 1.75rem;
+  border-radius: 2px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.addBtnGold:hover {
+  background-color: #D4AF37;
+  color: #ffffff;
+}
+
+.addBtnRed {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.75rem 1.75rem;
+  border-radius: 2px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.addBtnRed:hover {
+  background-color: var(--f1-red);
+  border-color: var(--f1-red);
+  color: #ffffff;
+}

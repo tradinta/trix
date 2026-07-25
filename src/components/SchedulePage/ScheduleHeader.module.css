@@ -1,0 +1,59 @@
+.header {
+  position: relative;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-dark);
+}
+
+.parallaxText {
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.25;
+  transition: transform 0.1s linear;
+}
+
+.calendarTitle {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 15vw;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--border-color);
+  white-space: nowrap;
+  user-select: none;
+  line-height: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 10;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.mainTitle {
+  font-family: 'Syncopate', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  font-weight: 300;
+  max-width: 42rem;
+  margin: 0 auto;
+  line-height: 1.6;
+}
