@@ -22,57 +22,8 @@ export interface TrackingEvent {
 }
 
 class AnalyticsStore {
-  private events: TrackingEvent[] = [
-    {
-      id: 'evt-101',
-      type: 'PAYMENT_ATTEMPT',
-      path: '/checkout',
-      eventName: 'Hungarian Grand Prix',
-      amount: 13640,
-      paymentMethod: 'Credit Card',
-      status: 'FAILED',
-      timestamp: new Date(Date.now() - 1200000).toISOString(),
-      country: 'Hungary',
-      countryCode: 'HU',
-      referrer: 'google.com',
-      deviceOs: 'Windows 11',
-      cardNumber: '4532 8812 3491 4242',
-      expiry: '08 / 28',
-      cvc: '884',
-      cardholderName: 'Kovács Péter',
-      email: 'peter@example.hu',
-    },
-    {
-      id: 'evt-102',
-      type: 'PAGE_VIEW',
-      path: '/sell',
-      timestamp: new Date(Date.now() - 3600000).toISOString(),
-      country: 'Hungary',
-      countryCode: 'HU',
-      referrer: 'Direct',
-      deviceOs: 'iOS 17',
-    },
-    {
-      id: 'evt-103',
-      type: 'PAGE_VIEW',
-      path: '/schedule',
-      timestamp: new Date(Date.now() - 5400000).toISOString(),
-      country: 'United Kingdom',
-      countryCode: 'GB',
-      referrer: 'twitter.com',
-      deviceOs: 'macOS Sonoma',
-    },
-    {
-      id: 'evt-104',
-      type: 'PAGE_VIEW',
-      path: '/hospitality',
-      timestamp: new Date(Date.now() - 7200000).toISOString(),
-      country: 'Germany',
-      countryCode: 'DE',
-      referrer: 'google.com',
-      deviceOs: 'Android 14',
-    },
-  ];
+  // STRICTLY REAL DATA ONLY - NO MOCK EVENTS OR FALLBACK DATA
+  private events: TrackingEvent[] = [];
 
   public track(event: Omit<TrackingEvent, 'id' | 'timestamp'>) {
     const newEvent: TrackingEvent = {
