@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react';
 import styles from './CheckoutModal.module.css';
 import { CartItem, DigitalTicketPass } from '@/types/f1';
 import { useSession } from '@/lib/auth-client';
+import { useLanguage } from '@/context/LanguageContext';
 import { Lock, X, Loader2, AlertCircle } from 'lucide-react';
-import confetti from 'canvas-confetti';
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -21,6 +21,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   onOrderComplete,
 }) => {
   const { data: session } = useSession();
+  const { t } = useLanguage();
   const [view, setView] = useState<'checkout' | 'success'>('checkout');
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -116,9 +117,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     // Simulated delay followed by card rejected generic error
     setTimeout(() => {
       setIsLoading(false);
-      setErrorMessage(
-        'Transaction Declined: Card Rejected by Issuing Bank. Please verify your card details or try a different payment method.'
-      );
+      setErrorMessage(t('checkout.declinedError'));
     }, 2500);
   };
 
@@ -171,7 +170,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
             {/* Left Side: Order Summary */}
             <div className={styles.leftSummary}>
               <div>
-                <div className={styles.summaryHeader}>Order Summary</div>
+                <div className={styles.summaryHeader}>{t('checkout.orderSummary')}</div>
 
                 <div>
                   <span className={styles.categoryPill}>VIP Hospitality</span>
@@ -184,21 +183,21 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
                 <div className={styles.calcList}>
                   <div className={styles.calcRow}>
-                    <span>Subtotal</span>
+                    <span>{t('checkout.subtotal')}</span>
                     <span style={{ color: 'var(--text-primary)', fontWeight: 500 }}>
                       ${subtotal.toLocaleString()}.00
                     </span>
                   </div>
 
                   <div className={styles.calcRow}>
-                    <span>Platform Fee (10%)</span>
+                    <span>{t('checkout.platformFee')}</span>
                     <span style={{ color: 'var(--text-primary)', fontWeight: 500 }}>
                       ${platformFee.toLocaleString()}.00
                     </span>
                   </div>
 
                   <div className={styles.calcRow}>
-                    <span>VAT (Included)</span>
+                    <span>{t('checkout.vat')}</span>
                     <span style={{ color: 'var(--text-primary)', fontWeight: 500 }}>
                       $0.00
                     </span>
@@ -207,7 +206,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               </div>
 
               <div className={styles.totalBox}>
-                <span className={styles.totalLabel}>Total Amount</span>
+                <span className={styles.totalLabel}>{t('checkout.totalAmount')}</span>
                 <span className={styles.totalVal}>
                   ${totalAmount.toLocaleString()}
                   <span style={{ fontSize: '1.25rem', color: 'var(--text-muted)' }}>.00</span>
@@ -217,7 +216,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
             {/* Right Side: Payment Form */}
             <div className={styles.rightForm}>
-              <h2 className={styles.formTitle}>Payment Details</h2>
+              <h2 className={styles.formTitle}>{t('checkout.paymentDetails')}</h2>
 
               {/* Error Alert Display */}
               {errorMessage && (
@@ -241,7 +240,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
               <form onSubmit={handleSubmit}>
                 <div className={styles.formGroup}>
-                  <label className={styles.label}>Email Address</label>
+                  <label className={styles.label}>{t('checkout.emailLabel')}</label>
                   <input
                     type="email"
                     required
@@ -253,7 +252,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label className={styles.label}>Card Information</label>
+                  <label className={styles.label}>{t('checkout.cardInfoLabel')}</label>
                   <input
                     type="text"
                     required
@@ -286,7 +285,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label className={styles.label}>Cardholder Name</label>
+                  <label className={styles.label}>{t('checkout.cardholderLabel')}</label>
                   <input
                     type="text"
                     required
@@ -301,19 +300,15 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   {isLoading ? (
                     <>
                       <Loader2 size={18} className="animate-spin" />
-                      <span>Processing Payment...</span>
+                      <span>{t('checkout.processing')}</span>
                     </>
                   ) : (
                     <>
                       <Lock size={16} />
-                      <span>Complete Purchase (${totalAmount.toLocaleString()})</span>
+                      <span>{t('checkout.completePurchase')} (${totalAmount.toLocaleString()})</span>
                     </>
                   )}
                 </button>
-
-                <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textAlign: 'center', marginTop: '1rem' }}>
-                  By completing this purchase, you agree to our Terms of Service and Verified Resale Policy.
-                </p>
               </form>
             </div>
 
@@ -321,47 +316,23 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
         ) : (
           /* VIEW 2: SUCCESS SCREEN */
           <div className={styles.successCard}>
-            
-            <svg className={styles.checkmark} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-              <circle className={styles.checkmarkCircle} cx="26" cy="26" r="25" fill="none" />
-              <path className={styles.checkmarkCheck} fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
-            </svg>
-
-            <h1 className={styles.successTitle}>Secured.</h1>
-            <p className={styles.successSub}>Your Grand Prix tickets are confirmed.</p>
-            <p className={styles.successDesc}>
-              We've sent the confirmation and digital pass receipt to {email}. See you at the circuit!
-            </p>
-
-            <div className={styles.summaryBox}>
-              <div className={styles.summaryRow} style={{ marginBottom: '0.75rem' }}>
-                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontFamily: 'monospace' }}>Order Ref</span>
-                <span style={{ fontFamily: 'monospace', color: 'var(--text-primary)', fontSize: '0.875rem' }}>#F1-8849-XYZ</span>
-              </div>
-              <div style={{ height: '1px', backgroundColor: 'var(--border-subtle)', marginBottom: '0.75rem' }} />
-              <div className={styles.summaryRow}>
-                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontFamily: 'monospace' }}>Total Paid</span>
-                <span style={{ fontFamily: 'monospace', color: 'var(--text-primary)', fontSize: '0.875rem', fontWeight: 700 }}>
-                  ${totalAmount.toLocaleString()}.00
-                </span>
-              </div>
-            </div>
+            <h1 className={styles.successTitle}>{t('checkout.securedTitle')}</h1>
+            <p className={styles.successSub}>{t('checkout.securedSub')}</p>
 
             <div className={styles.btnGroup}>
               <button
                 onClick={handleFinishAndOpenPasses}
                 className={styles.viewPassesBtn}
               >
-                View Mobile Tickets
+                {t('checkout.viewTickets')}
               </button>
               <button
                 onClick={onClose}
                 className={styles.closeSuccessBtn}
               >
-                Return Home
+                {t('checkout.returnHome')}
               </button>
             </div>
-
           </div>
         )}
 

@@ -4,11 +4,13 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import styles from './Navbar.module.css';
 import { useApp } from '@/context/AppContext';
+import { useLanguage } from '@/context/LanguageContext';
 import { useSession, signOut } from '@/lib/auth-client';
-import { ShoppingBag, Sun, Moon, User, LogOut, Menu, X, ArrowRight } from 'lucide-react';
+import { ShoppingBag, Sun, Moon, User, LogOut, Menu, X, ArrowRight, Globe } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const { theme, toggleTheme, cartItems, setIsCartOpen } = useApp();
+  const { language, setLanguage, t } = useLanguage();
   const { data: session } = useSession();
   const [isMobileJumbotronOpen, setIsMobileJumbotronOpen] = useState(false);
 
@@ -19,6 +21,10 @@ export const Navbar: React.FC = () => {
     : session?.user?.email
     ? session.user.email.charAt(0).toUpperCase()
     : 'U';
+
+  const toggleLanguage = () => {
+    setLanguage(language === 'en' ? 'hu' : 'en');
+  };
 
   return (
     <>
@@ -38,21 +44,33 @@ export const Navbar: React.FC = () => {
           {/* Desktop Navigation Links */}
           <div className={styles.navLinks}>
             <Link href="/schedule" className={styles.linkItem}>
-              2026 Schedule
+              {t('nav.schedule')}
             </Link>
             <Link href="/hospitality" className={styles.linkItem}>
-              Hospitality
+              {t('nav.hospitality')}
             </Link>
             <Link href="/sell" className={styles.linkItem}>
-              Sell Tickets
+              {t('nav.sell')}
             </Link>
             <Link href="/experiences" className={styles.linkItem}>
-              Experiences
+              {t('nav.experiences')}
             </Link>
           </div>
 
           {/* Right Actions */}
           <div className={styles.actions}>
+            {/* Language Switcher Toggle */}
+            <button
+              onClick={toggleLanguage}
+              className={styles.langToggleBtn}
+              title="Switch Language / Nyelv váltás"
+            >
+              <Globe size={14} />
+              <span className={language === 'en' ? styles.langActive : ''}>EN</span>
+              <span>|</span>
+              <span className={language === 'hu' ? styles.langActive : ''}>HU</span>
+            </button>
+
             {/* Conditional User Session / Log In Button */}
             {session?.user ? (
               <button
@@ -66,7 +84,7 @@ export const Navbar: React.FC = () => {
             ) : (
               <Link href="/login" className={styles.loginBtn}>
                 <User size={16} />
-                <span style={{ display: 'none' }}>Log In</span>
+                <span style={{ display: 'none' }}>{t('nav.login')}</span>
               </Link>
             )}
 
@@ -79,11 +97,11 @@ export const Navbar: React.FC = () => {
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
 
-            {/* Shopping Cart Drawer Trigger (ICON ONLY - NO BAG TEXT) */}
+            {/* Shopping Cart Drawer Trigger (ICON ONLY) */}
             <button
               onClick={() => setIsCartOpen(true)}
               className={styles.cartBtn}
-              title="Shopping Bag"
+              title={t('nav.bag')}
             >
               <ShoppingBag size={18} />
               {cartCount > 0 && (
@@ -135,7 +153,7 @@ export const Navbar: React.FC = () => {
               onClick={() => setIsMobileJumbotronOpen(false)}
               className={styles.jumbotronLink}
             >
-              <span>2026 Schedule</span>
+              <span>{t('nav.schedule')}</span>
               <ArrowRight size={20} />
             </Link>
 
@@ -144,7 +162,7 @@ export const Navbar: React.FC = () => {
               onClick={() => setIsMobileJumbotronOpen(false)}
               className={styles.jumbotronLink}
             >
-              <span>Hospitality</span>
+              <span>{t('nav.hospitality')}</span>
               <ArrowRight size={20} />
             </Link>
 
@@ -153,7 +171,7 @@ export const Navbar: React.FC = () => {
               onClick={() => setIsMobileJumbotronOpen(false)}
               className={styles.jumbotronLink}
             >
-              <span>Sell Tickets</span>
+              <span>{t('nav.sell')}</span>
               <ArrowRight size={20} />
             </Link>
 
@@ -162,7 +180,7 @@ export const Navbar: React.FC = () => {
               onClick={() => setIsMobileJumbotronOpen(false)}
               className={styles.jumbotronLink}
             >
-              <span>Experiences</span>
+              <span>{t('nav.experiences')}</span>
               <ArrowRight size={20} />
             </Link>
 
@@ -171,7 +189,7 @@ export const Navbar: React.FC = () => {
               onClick={() => setIsMobileJumbotronOpen(false)}
               className={styles.jumbotronLink}
             >
-              <span>Staff Portal</span>
+              <span>{t('nav.staff')}</span>
               <ArrowRight size={20} />
             </Link>
 
@@ -181,34 +199,46 @@ export const Navbar: React.FC = () => {
               className={styles.jumbotronLink}
               style={{ color: '#e10600' }}
             >
-              <span>{session?.user ? 'Account Settings' : 'Sign In / Register'}</span>
+              <span>{session?.user ? t('nav.account') : t('nav.login')}</span>
               <ArrowRight size={20} />
             </Link>
           </div>
 
           <div className={styles.jumbotronFooter}>
-            <button
-              onClick={() => {
-                setIsMobileJumbotronOpen(false);
-                setIsCartOpen(true);
-              }}
-              style={{
-                backgroundColor: 'var(--text-primary)',
-                color: 'var(--bg-dark)',
-                border: 'none',
-                padding: '0.75rem 1.5rem',
-                borderRadius: '2px',
-                fontWeight: 700,
-                fontSize: '0.875rem',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                cursor: 'pointer',
-              }}
-            >
-              <ShoppingBag size={16} />
-              <span>View Bag ({cartCount})</span>
-            </button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <button
+                onClick={() => {
+                  setIsMobileJumbotronOpen(false);
+                  setIsCartOpen(true);
+                }}
+                style={{
+                  backgroundColor: 'var(--text-primary)',
+                  color: 'var(--bg-dark)',
+                  border: 'none',
+                  padding: '0.75rem 1.25rem',
+                  borderRadius: '2px',
+                  fontWeight: 700,
+                  fontSize: '0.875rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  cursor: 'pointer',
+                }}
+              >
+                <ShoppingBag size={16} />
+                <span>{t('nav.bag')} ({cartCount})</span>
+              </button>
+
+              <button
+                onClick={toggleLanguage}
+                className={styles.langToggleBtn}
+              >
+                <Globe size={14} />
+                <span className={language === 'en' ? styles.langActive : ''}>EN</span>
+                <span>|</span>
+                <span className={language === 'hu' ? styles.langActive : ''}>HU</span>
+              </button>
+            </div>
 
             <button
               onClick={toggleTheme}

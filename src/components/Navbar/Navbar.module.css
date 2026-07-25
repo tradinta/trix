@@ -117,6 +117,31 @@
   gap: 0.75rem;
 }
 
+/* Language Switcher Toggle */
+.langToggleBtn {
+  height: 2.5rem;
+  padding: 0 0.75rem;
+  border-radius: 2px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.langToggleBtn:hover {
+  border-color: #e10600;
+}
+
+.langActive {
+  color: #e10600;
+}
+
 .loginBtn {
   font-size: 0.875rem;
   font-weight: 600;

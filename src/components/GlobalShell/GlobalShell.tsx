@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { AppProvider, useApp } from '@/context/AppContext';
+import { LanguageProvider } from '@/context/LanguageContext';
 import { Navbar } from '@/components/Navbar/Navbar';
 import { CartDrawer } from '@/components/CartDrawer/CartDrawer';
 import { CheckoutModal } from '@/components/CheckoutModal/CheckoutModal';
@@ -69,7 +70,9 @@ const GlobalOverlays: React.FC<{ children: React.ReactNode }> = ({ children }) =
 export const GlobalShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <AppProvider>
-      <GlobalOverlays>{children}</GlobalOverlays>
+      <LanguageProvider>
+        <GlobalOverlays>{children}</GlobalOverlays>
+      </LanguageProvider>
     </AppProvider>
   );
 };
