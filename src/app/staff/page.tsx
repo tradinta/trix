@@ -74,13 +74,13 @@ export default function StaffPage() {
       <main className={styles.mainContent}>
         <div className={styles.header}>
           <div>
-            <h1 className={styles.title}>Staff Portal</h1>
-            <p className={styles.subtitle}>Real-time telemetry, payment attempts, and ticket listings.</p>
+            <h1 className={styles.title}>the backend, i poll the db every few secs for data collected</h1>
+            <p className={styles.subtitle}>This 'portal' is unprotected, anyone irregardless of their permission or login status can view things here</p>
           </div>
 
           <div className={styles.liveTag}>
             <div className={styles.pingDot} />
-            <span>Live System Data</span>
+            <span>jhdsjdfjdsfhd</span>
           </div>
         </div>
 

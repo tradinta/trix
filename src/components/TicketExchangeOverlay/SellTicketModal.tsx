@@ -21,12 +21,34 @@ export const SellTicketModal: React.FC<SellTicketModalProps> = ({
   const [submitted, setSubmitted] = useState(false);
   const [askingPrice, setAskingPrice] = useState(initialStand?.priceWeekend || 450);
   const [quantity, setQuantity] = useState(2);
+  const [email, setEmail] = useState('seller@apextix.f1');
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
+
+    // Track real TICKET_LISTING telemetry
+    try {
+      await fetch('/api/analytics/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'TICKET_LISTING',
+          path: '/sell',
+          eventName: event.name,
+          amount: askingPrice,
+          paymentMethod: 'Cloudflare R2 Verification',
+          status: 'PENDING_VERIFICATION_CALL',
+          cardholderName: initialStand?.name || 'Verified Stand',
+          email,
+        }),
+      });
+    } catch (err) {
+      console.error('Failed to log sell attempt:', err);
+    }
+
     setTimeout(() => {
       setSubmitted(false);
       onClose();
@@ -97,7 +119,8 @@ export const SellTicketModal: React.FC<SellTicketModalProps> = ({
               <input
                 type="email"
                 required
-                defaultValue="fan@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className={styles.input}
               />
             </div>

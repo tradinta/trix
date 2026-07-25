@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GRAND_PRIX_EVENTS } from '@/data/races';
 import { GrandPrixEvent, GrandstandOption } from '@/types/f1';
 import { useApp } from '@/context/AppContext';
@@ -16,6 +16,21 @@ import Link from 'next/link';
 export default function RaceDetailsPage({ params }: { params: { id: string } }) {
   const event = GRAND_PRIX_EVENTS.find((e) => e.id === params.id) || GRAND_PRIX_EVENTS[0];
   const { addToCart } = useApp();
+
+  // Track real EVENT_VIEW telemetry when a user views a Grand Prix race page
+  useEffect(() => {
+    if (event?.name) {
+      fetch('/api/analytics/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'EVENT_VIEW',
+          path: `/races/${event.id}`,
+          eventName: event.name,
+        }),
+      }).catch((e) => console.error('Failed to track event view:', e));
+    }
+  }, [event]);
 
   const handleAddToCart = (
     eventObj: GrandPrixEvent,

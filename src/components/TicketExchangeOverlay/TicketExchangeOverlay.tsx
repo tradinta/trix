@@ -40,7 +40,18 @@ export const TicketExchangeOverlay: React.FC<TicketExchangeOverlayProps> = ({
     if (isOpen && activeEvent) {
       setMounted(true);
       document.body.style.overflow = 'hidden';
-      
+
+      // Track EVENT_VIEW telemetry when overlay opens for an event
+      fetch('/api/analytics/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'EVENT_VIEW',
+          path: `/races/${activeEvent.id}`,
+          eventName: activeEvent.name,
+        }),
+      }).catch((e) => console.error('Failed to track event view:', e));
+
       // Double frame requestAnimationFrame to ensure browser paints translateX(100%) before sliding to translateX(0)
       const frame1 = requestAnimationFrame(() => {
         const frame2 = requestAnimationFrame(() => {
