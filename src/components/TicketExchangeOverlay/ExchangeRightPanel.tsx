@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import styles from './ExchangeRightPanel.module.css';
 import { GrandPrixEvent, GrandstandOption } from '@/types/f1';
+import { useLanguage } from '@/context/LanguageContext';
 import { TicketListingRow } from './TicketListingRow';
 import { Plus } from 'lucide-react';
 
@@ -19,6 +20,7 @@ export const ExchangeRightPanel: React.FC<ExchangeRightPanelProps> = ({
   onAddToCart,
   onOpenSellModal,
 }) => {
+  const { t } = useLanguage();
   const [activeZoneFilter, setActiveZoneFilter] = useState<'All' | 'VIP' | 'Grandstand' | 'General Admission'>('All');
 
   const filteredGrandstands = activeZoneFilter === 'All'
@@ -31,8 +33,8 @@ export const ExchangeRightPanel: React.FC<ExchangeRightPanelProps> = ({
       {/* Exchange Header */}
       <div className={styles.headerRow}>
         <div>
-          <h3 className={styles.title}>Ticket Exchange</h3>
-          <p className={styles.subtitle}>42 active listings from verified fans</p>
+          <h3 className={styles.title}>{t('ticketDetails.availableListings')}</h3>
+          <p className={styles.subtitle}>42 {t('ticketDetails.availableListings').toLowerCase()}</p>
         </div>
 
         <button
@@ -40,7 +42,7 @@ export const ExchangeRightPanel: React.FC<ExchangeRightPanelProps> = ({
           className={styles.listBtn}
         >
           <Plus size={16} />
-          <span>List Your Tickets</span>
+          <span>{t('sell.title')}</span>
         </button>
       </div>
 
@@ -52,7 +54,7 @@ export const ExchangeRightPanel: React.FC<ExchangeRightPanelProps> = ({
             onClick={() => setActiveZoneFilter(zone)}
             className={activeZoneFilter === zone ? styles.pillActive : styles.pillInactive}
           >
-            {zone === 'All' ? 'All Zones' : zone}
+            {zone === 'All' ? 'All' : zone}
           </button>
         ))}
       </div>

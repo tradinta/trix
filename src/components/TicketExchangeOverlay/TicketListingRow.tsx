@@ -3,6 +3,7 @@
 import React from 'react';
 import styles from './TicketListingRow.module.css';
 import { GrandstandOption } from '@/types/f1';
+import { useLanguage } from '@/context/LanguageContext';
 import { ShoppingBag } from 'lucide-react';
 
 interface TicketListingRowProps {
@@ -18,6 +19,7 @@ export const TicketListingRow: React.FC<TicketListingRowProps> = ({
   onAddToCart,
   onOpenSellModal,
 }) => {
+  const { t } = useLanguage();
   const isVip = stand.category === 'VIP';
   const isGrandstand = stand.category === 'Grandstand';
 
@@ -37,7 +39,7 @@ export const TicketListingRow: React.FC<TicketListingRowProps> = ({
       <div className={styles.rightActions}>
         <div className={styles.priceBlock}>
           <span className={styles.priceVal}>${stand.priceWeekend}</span>
-          <span className={styles.availVal}>{stand.availableSeats} passes available</span>
+          <span className={styles.availVal}>{stand.availableSeats} {t('status.available').toLowerCase()}</span>
         </div>
 
         <div className={styles.btnGroup}>
@@ -45,13 +47,13 @@ export const TicketListingRow: React.FC<TicketListingRowProps> = ({
             onClick={() => onOpenSellModal(stand)}
             className={styles.sellBtn}
           >
-            Sell
+            {t('nav.sell')}
           </button>
 
           <button
             onClick={() => onAddToCart(stand)}
             className={styles.bagBtn}
-            title="Add to Bag"
+            title={t('ticketDetails.addToCart')}
           >
             <ShoppingBag size={16} />
           </button>
@@ -60,7 +62,7 @@ export const TicketListingRow: React.FC<TicketListingRowProps> = ({
             onClick={() => onBuyNow(stand)}
             className={isVip ? styles.buyNowBtnVip : styles.buyNowBtnRed}
           >
-            Buy Now
+            {t('ticketDetails.buyNow')}
           </button>
         </div>
       </div>

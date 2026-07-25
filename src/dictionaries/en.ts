@@ -42,6 +42,25 @@ export const en = {
     lapRecord: 'Lap Record',
     startingFrom: 'Starting From',
   },
+  // Ticket Details & Exchange Overlay
+  ticketDetails: {
+    officialPasses: 'Official Pass Marketplace',
+    round: 'Round',
+    circuitOverview: 'Circuit & Track Overview',
+    trackLength: 'Track Length',
+    totalLaps: 'Total Laps',
+    lapRecordLabel: 'Lap Record',
+    availableListings: 'Verified Ticket Listings',
+    buyNow: 'Buy Now',
+    addToCart: 'Add to Cart',
+    weekendPass: 'Weekend (3-Day)',
+    sundayPass: 'Sunday Race Day',
+    friSatPass: 'Friday-Saturday Pass',
+    perTicket: 'per ticket',
+    featuresTitle: 'Included Features',
+    sellerVerified: 'Verified Seller',
+    selectPassType: 'Select Pass Type',
+  },
   // Hospitality Page
   hospitality: {
     title: 'Paddock Club & Team Suites',
@@ -118,21 +137,28 @@ export const en = {
     listingLive: 'Listing Live!',
     viewSchedule: 'View Marketplace Schedule',
   },
-  // Auth Pages
+  // Auth Pages (Login & Signup)
   auth: {
     signInTitle: 'Sign In',
     signInSub: 'Welcome back to ApexTix.',
     createTitle: 'Create Account',
     createSub: 'Join the premium ticket exchange.',
     fullName: 'Full Name',
+    namePlaceholder: 'Alex Vance',
     email: 'Email Address',
+    emailPlaceholder: 'you@example.com',
     password: 'Password',
+    passwordPlaceholder: '••••••••••••',
     accessAccount: 'Access Account',
     joinBtn: 'Join ApexTix',
     newToPaddock: 'New to the paddock?',
     alreadyHaveAccount: 'Already have an account?',
     createAccountBtn: 'Create an account',
     signInBtn: 'Sign In',
+    authenticPasses: 'Verified F1 Passes',
+    authenticDesc: 'Directly linked to official circuit ticketing systems.',
+    signingIn: 'Signing In...',
+    creatingAccount: 'Creating Account...',
   },
   // Cookie & Language Consent Modal
   cookieConsent: {

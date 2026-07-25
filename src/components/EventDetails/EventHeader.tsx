@@ -3,14 +3,17 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './EventHeader.module.css';
+import { useLanguage } from '@/context/LanguageContext';
 import { ArrowLeft } from 'lucide-react';
 
 export const EventHeader: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <header className={styles.header}>
-      <Link href="/" className={styles.backBtn}>
+      <Link href="/schedule" className={styles.backBtn}>
         <ArrowLeft size={18} />
-        <span>Back To Schedule</span>
+        <span>{t('schedule.title')}</span>
       </Link>
 
       <Link href="/" className={styles.brand}>

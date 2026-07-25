@@ -1,17 +1,18 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import styles from './LoginForm.module.css';
-import { ArrowRight, Loader2, AlertCircle } from 'lucide-react';
 import { signIn } from '@/lib/auth-client';
+import { useLanguage } from '@/context/LanguageContext';
+import { Mail, Lock, ArrowRight, Loader2, AlertCircle } from 'lucide-react';
 
 interface LoginFormProps {
-  onToggleToRegister: () => void;
+  onSwitchToRegister: () => void;
+  onSuccess?: () => void;
 }
 
-export const LoginForm: React.FC<LoginFormProps> = ({ onToggleToRegister }) => {
-  const router = useRouter();
+export const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister, onSuccess }) => {
+  const { t } = useLanguage();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -19,128 +20,93 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onToggleToRegister }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password) {
-      setErrorMessage('Please fill in all fields.');
-      return;
-    }
-
     setIsLoading(true);
     setErrorMessage(null);
 
-    // Timeout safety race to prevent stuck loading state
-    const timeoutPromise = new Promise<{ error: { message: string } }>((resolve) => {
-      setTimeout(() => {
-        resolve({ error: { message: 'Authentication timed out. Logging in with demo credentials...' } });
-      }, 3000);
-    });
-
     try {
-      const res: any = await Promise.race([
-        signIn.email({ email, password }),
-        timeoutPromise,
-      ]);
+      const { error } = await signIn.email({
+        email,
+        password,
+      });
 
-      if (res?.error) {
-        // If it's the timeout fallback, simulate successful demo session login
-        if (res.error.message.includes('demo credentials')) {
-          router.push('/');
-        } else {
-          setErrorMessage(res.error.message || 'Invalid email or password');
-        }
+      if (error) {
+        setErrorMessage(error.message || 'Invalid credentials');
       } else {
-        router.push('/');
+        if (onSuccess) onSuccess();
+        window.location.href = '/';
       }
     } catch (err: any) {
-      // In case of unhandled error, redirect to home page as demo fallback
-      router.push('/');
+      setErrorMessage(err.message || 'Failed to sign in');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.formContainer}>
       <div className={styles.header}>
-        <h2 className={styles.title}>Sign In</h2>
-        <p className={styles.subtitle}>Welcome back to ApexTix.</p>
+        <h2 className={styles.title}>{t('auth.signInTitle')}</h2>
+        <p className={styles.subtitle}>{t('auth.signInSub')}</p>
       </div>
 
       {errorMessage && (
-        <div style={{
-          padding: '0.875rem 1rem',
-          marginBottom: '1.5rem',
-          backgroundColor: 'rgba(225, 6, 0, 0.15)',
-          border: '1px solid #e10600',
-          borderRadius: '2px',
-          color: '#ffffff',
-          fontSize: '0.8rem',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.5rem',
-          lineHeight: '1.4'
-        }}>
-          <AlertCircle size={16} color="#e10600" style={{ flexShrink: 0 }} />
+        <div className={styles.errorAlert}>
+          <AlertCircle size={16} />
           <span>{errorMessage}</span>
         </div>
       )}
 
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.inputGroup}>
-          <input
-            type="email"
-            required
-            id="login-email"
-            placeholder=" "
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={styles.input}
-            autoComplete="email"
-          />
-          <label htmlFor="login-email" className={styles.label}>Email Address</label>
+          <label className={styles.label}>{t('auth.email')}</label>
+          <div className={styles.inputWrapper}>
+            <Mail size={18} className={styles.inputIcon} />
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder={t('auth.emailPlaceholder')}
+              className={styles.input}
+            />
+          </div>
         </div>
 
         <div className={styles.inputGroup}>
-          <input
-            type="password"
-            required
-            id="login-password"
-            placeholder=" "
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={styles.input}
-            autoComplete="current-password"
-          />
-          <label htmlFor="login-password" className={styles.label}>Password</label>
-        </div>
-
-        <div className={styles.forgotLink}>
-          <a href="#" onClick={(e) => e.preventDefault()} className={styles.forgotBtn}>
-            Forgot Password?
-          </a>
+          <label className={styles.label}>{t('auth.password')}</label>
+          <div className={styles.inputWrapper}>
+            <Lock size={18} className={styles.inputIcon} />
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder={t('auth.passwordPlaceholder')}
+              className={styles.input}
+            />
+          </div>
         </div>
 
         <button type="submit" disabled={isLoading} className={styles.submitBtn}>
           {isLoading ? (
             <>
               <Loader2 size={18} className="animate-spin" />
-              <span>Authenticating...</span>
+              <span>{t('auth.signingIn')}</span>
             </>
           ) : (
             <>
-              <span>Access Account</span>
-              <ArrowRight size={16} />
+              <span>{t('auth.accessAccount')}</span>
+              <ArrowRight size={18} />
             </>
           )}
         </button>
       </form>
 
-      <div className={styles.footerRow}>
-        <span className={styles.footerText}>
-          New to the paddock?
-          <button type="button" onClick={onToggleToRegister} className={styles.toggleBtn}>
-            Create an account
-          </button>
-        </span>
+      <div className={styles.footer}>
+        <span>{t('auth.newToPaddock')}</span>
+        <button onClick={onSwitchToRegister} className={styles.switchBtn}>
+          {t('auth.createAccountBtn')}
+        </button>
       </div>
     </div>
   );

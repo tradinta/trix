@@ -3,6 +3,7 @@
 import React from 'react';
 import styles from './TicketTierList.module.css';
 import { GrandPrixEvent, GrandstandOption } from '@/types/f1';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface TicketTierListProps {
   event: GrandPrixEvent;
@@ -18,12 +19,14 @@ export const TicketTierList: React.FC<TicketTierListProps> = ({
   event,
   onAddToCart,
 }) => {
+  const { t } = useLanguage();
+
   return (
     <div className={styles.container}>
       
       {/* Sticky Tab Header */}
       <div className={styles.headerTab}>
-        <button className={styles.tabActive}>Available Passes</button>
+        <button className={styles.tabActive}>{t('ticketDetails.availableListings')}</button>
       </div>
 
       {/* Render Grandstands & VIP Tiers */}
@@ -42,7 +45,7 @@ export const TicketTierList: React.FC<TicketTierListProps> = ({
                 </span>
                 <h3 className={styles.tierName}>{stand.name}</h3>
               </div>
-              <span className={styles.daysTag}>3 Days</span>
+              <span className={styles.daysTag}>{t('ticketDetails.weekendPass')}</span>
             </div>
 
             {/* Features Checklist */}
@@ -63,14 +66,14 @@ export const TicketTierList: React.FC<TicketTierListProps> = ({
             <div className={styles.cardFooter}>
               <span className={styles.priceText}>
                 ${stand.priceWeekend}{' '}
-                <span className={styles.priceUnit}>/ person</span>
+                <span className={styles.priceUnit}>/ {t('ticketDetails.perTicket')}</span>
               </span>
 
               <button
                 onClick={() => onAddToCart(event, stand, 'Weekend (3-Day)', 1)}
                 className={isVip ? styles.addBtnGold : styles.addBtnRed}
               >
-                Add To Bag
+                {t('ticketDetails.addToCart')}
               </button>
             </div>
           </div>

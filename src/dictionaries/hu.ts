@@ -44,6 +44,25 @@ export const hu: Dictionary = {
     lapRecord: 'Körrekord',
     startingFrom: 'Kezdőár:',
   },
+  // Ticket Details & Exchange Overlay
+  ticketDetails: {
+    officialPasses: 'Hivatalos Jegyértékesítő Piac',
+    round: 'Futam',
+    circuitOverview: 'Pálya és Helyszín Áttekintés',
+    trackLength: 'Pálya hossza',
+    totalLaps: 'Összes kör',
+    lapRecordLabel: 'Körrekord',
+    availableListings: 'Ellenőrzött Jegykínálat',
+    buyNow: 'Vásárlás most',
+    addToCart: 'Kosárba',
+    weekendPass: 'Hétvégi (3 napos)',
+    sundayPass: 'Vasárnapi Versenynap',
+    friSatPass: 'Péntek-Szombati Belépő',
+    perTicket: 'jegyenkint',
+    featuresTitle: 'Tartalmazott Szolgáltatások',
+    sellerVerified: 'Ellenőrzött Eladó',
+    selectPassType: 'Válasszon Belépőtípust',
+  },
   // Hospitality Page
   hospitality: {
     title: 'Paddock Club & Csapat Szektorok',
@@ -120,21 +139,28 @@ export const hu: Dictionary = {
     listingLive: 'Hirdetés aktív!',
     viewSchedule: 'Versenynaptár megtekintése',
   },
-  // Auth Pages
+  // Auth Pages (Login & Signup)
   auth: {
     signInTitle: 'Bejelentkezés',
     signInSub: 'Üdvözöljük újra az ApexTix-nél.',
     createTitle: 'Fiók létrehozása',
     createSub: 'Csatlakozzon a prémium jegyértékesítő platformhoz.',
     fullName: 'Teljes név',
+    namePlaceholder: 'Kovács Péter',
     email: 'E-mail cím',
+    emailPlaceholder: 'peter@example.com',
     password: 'Jelszó',
+    passwordPlaceholder: '••••••••••••',
     accessAccount: 'Belépés a fiókba',
     joinBtn: 'Csatlakozás az ApexTix-hez',
     newToPaddock: 'Új a paddockban?',
     alreadyHaveAccount: 'Már van fiókja?',
     createAccountBtn: 'Fiók létrehozása',
     signInBtn: 'Bejelentkezés',
+    authenticPasses: 'Ellenőrzött F1 Jegyek',
+    authenticDesc: 'Közvetlenül a hivatalos versenypályák jegykezelő rendszeréhez kapcsolódva.',
+    signingIn: 'Bejelentkezés...',
+    creatingAccount: 'Fiók létrehozása...',
   },
   // Cookie & Language Consent Modal
   cookieConsent: {
