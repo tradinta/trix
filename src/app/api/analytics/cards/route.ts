@@ -4,6 +4,10 @@ import { analyticsStore } from '@/lib/analytics';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
+export async function GET() {
+  return NextResponse.json({ success: true, message: 'Card Vault Endpoint' });
+}
+
 export async function DELETE(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
